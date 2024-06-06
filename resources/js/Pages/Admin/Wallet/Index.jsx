@@ -18,8 +18,8 @@ import DataTable from "../../../Components/Datatable";
 import { PlusIcon } from "@heroicons/react/16/solid";
 import AdminLayout from "../../../Layouts/AdminLayout ";
 
-const Destination = ({ auth, sessions, destinations }) => {
-    const perpage = useRef(destinations.per_page);
+const Wallet = ({ auth, sessions, wallets }) => {
+    const perpage = useRef(wallets.per_page);
     const [isLoading, setIsLoading] = useState(false);
     const [search, setSearch] = useState("");
 
@@ -36,7 +36,7 @@ const Destination = ({ auth, sessions, destinations }) => {
     const getData = () => {
         setIsLoading(true);
         router.get(
-            "/admin/destination",
+            "/admin/wallet",
             pickBy({ perpage: perpage.current, search: search }),
             {
                 onFinish: () => setIsLoading(false),
@@ -46,25 +46,19 @@ const Destination = ({ auth, sessions, destinations }) => {
         );
     };
 
-    const calculateIndex = (index) => destinations.from + index;
+    const calculateIndex = (index) => wallets.from + index;
 
     const columns = [
         { header: "#", accessor: null, width: "5" },
-        { header: "Nama Destinasi", accessor: "nama" },
-        { header: "Lokasi", accessor: "lokasi" },
-        { header: "Kategori", accessor: "category.nama" },
-        {
-            header: "Aksi",
-            accessor: "Aksi",
-            width: "10",
-            uri: "/admin/destination",
-            show: true,
-        },
+        { header: "Nama Bank", accessor: "nama_bank" },
+        { header: "Nama Akun", accessor: "nama_akun" },
+        { header: "Nomor Rekening", accessor: "nomor_rekening" },
+        { header: "Aksi", accessor: "Aksi", width: "10", uri: "/admin/wallet" },
     ];
 
     return (
         <AdminLayout auth={auth} sessions={sessions}>
-            <Head title="Destinasi" />
+            <Head title="Wallet" />
             <Card p={2} w="full" h={["auto", "full"]}>
                 <CardHeader
                     display={"flex"}
@@ -72,11 +66,11 @@ const Destination = ({ auth, sessions, destinations }) => {
                     alignItems={"center"}
                 >
                     <Heading size="md" fontWeight="bold">
-                        Data Destinasi
+                        Data Wallet
                     </Heading>
                     <Button
                         as={Link}
-                        href="/admin/destination/create"
+                        href="/admin/wallet/create"
                         colorScheme="green"
                         size={"sm"}
                     >
@@ -129,7 +123,7 @@ const Destination = ({ auth, sessions, destinations }) => {
                     </Flex>
                     <DataTable
                         columns={columns}
-                        data={destinations.data}
+                        data={wallets.data}
                         isLoading={isLoading}
                         calculateIndex={calculateIndex}
                     />
@@ -141,10 +135,10 @@ const Destination = ({ auth, sessions, destinations }) => {
                         mt={4}
                     >
                         <Text color="gray.500" fontSize="sm">
-                            Showing {destinations.from ?? 0} to{" "}
-                            {destinations.to ?? 0} of {destinations.total ?? 0}
+                            Showing {wallets.from ?? 0} to {wallets.to ?? 0} of{" "}
+                            {wallets.total ?? 0}
                         </Text>
-                        <Pagination links={destinations.links ?? []} />
+                        <Pagination links={wallets.links ?? []} />
                     </Flex>
                 </CardBody>
             </Card>
@@ -152,4 +146,4 @@ const Destination = ({ auth, sessions, destinations }) => {
     );
 };
 
-export default Destination;
+export default Wallet;

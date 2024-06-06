@@ -30,6 +30,8 @@ const NavItem = ({ icon, children, href, ...rest }) => {
             >
                 {icon && (
                     <Icon
+                    
+
                         mr="4"
                         fontSize="16"
                         _groupHover={{

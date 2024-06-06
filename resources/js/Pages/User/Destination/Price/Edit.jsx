@@ -1,5 +1,5 @@
 import React from "react";
-import { Head, Link, useForm, usePage } from "@inertiajs/react";
+import { Head, Link, useForm } from "@inertiajs/react";
 import {
     Button,
     Card,
@@ -12,36 +12,31 @@ import {
     Heading,
     Icon,
     Input,
-    Select,
     Text,
     Textarea,
 } from "@chakra-ui/react";
 import { ArrowLeftIcon, BookmarkIcon } from "@heroicons/react/16/solid";
 import AdminLayout from "../../../../Layouts/AdminLayout ";
 
-const CreateDestinationPrice = ({ auth, sessions }) => {
-    const { url } = usePage();
-    const kode = new URLSearchParams(url.split("?")[1]).get("kode");
-
-    const { data, setData, post, processing, errors } = useForm({
-        nama: "",
-        deskripsi: "",
-        harga: "",
-        destination_id: kode,
+const EditDestinationPrice = ({ auth, sessions, destinationPrice }) => {
+    const { data, setData, put, processing, errors } = useForm({
+        nama: destinationPrice.nama,
+        deskripsi: destinationPrice.deskripsi,
+        harga: destinationPrice.harga,
     });
 
     const submit = (e) => {
         e.preventDefault();
-        post("/admin/destination-price");
+        put(`/destination-price/${destinationPrice.uuid}`);
     };
 
     return (
         <AdminLayout auth={auth} sessions={sessions}>
-            <Head title="Tambah Harga Destinasi" />
+            <Head title="Edit Harga Destinasi" />
             <Card maxW={"xl"} w="full" p={2} h={"auto"}>
                 <CardHeader pb={0}>
                     <Heading size="md" fontWeight="bold">
-                        Tambah Harga Destinasi
+                        Edit Harga Destinasi
                     </Heading>
                 </CardHeader>
                 <form onSubmit={submit}>
@@ -122,7 +117,10 @@ const CreateDestinationPrice = ({ auth, sessions }) => {
                         </Button>
                         <Button
                             as={Link}
-                            href={"/admin/destination/" + kode}
+                            href={
+                                "/destination/" +
+                                destinationPrice.destination_uuid
+                            }
                             colorScheme="gray"
                             ml={3}
                         >
@@ -136,4 +134,4 @@ const CreateDestinationPrice = ({ auth, sessions }) => {
     );
 };
 
-export default CreateDestinationPrice;
+export default EditDestinationPrice;

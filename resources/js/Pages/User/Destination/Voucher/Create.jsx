@@ -1,5 +1,5 @@
 import React from "react";
-import { Head, Link, useForm } from "@inertiajs/react";
+import { Head, Link, useForm, usePage } from "@inertiajs/react";
 import {
     Button,
     Card,
@@ -17,52 +17,56 @@ import {
     Textarea,
 } from "@chakra-ui/react";
 import { ArrowLeftIcon, BookmarkIcon } from "@heroicons/react/16/solid";
-import AdminLayout from "../../../Layouts/AdminLayout ";
+import AdminLayout from "../../../../Layouts/AdminLayout ";
 
-const CreateDestination = ({ auth, sessions, categories }) => {
+const CreateDestinationVoucher = ({ auth, sessions }) => {
+    const { url } = usePage();
+    const kode = new URLSearchParams(url.split("?")[1]).get("kode");
+
     const { data, setData, post, processing, errors } = useForm({
-        category_id: "",
-        nama: "",
+        kode: "",
         deskripsi: "",
-        link_youtube: "",
-        lokasi: "",
-        rating: "",
+        diskon: "",
+        kuota: "",
+        tanggal_kadaluarsa: "",
+        status: "",
+        destination_id: kode,
     });
 
     const submit = (e) => {
         e.preventDefault();
-        post("/admin/destination");
+        post("/destination-voucher");
     };
 
     return (
         <AdminLayout auth={auth} sessions={sessions}>
-            <Head title="Tambah Destinasi" />
+            <Head title="Tambah Voucher Destinasi" />
             <Card maxW={"xl"} w="full" p={2} h={"auto"}>
                 <CardHeader pb={0}>
                     <Heading size="md" fontWeight="bold">
-                        Tambah Destinasi
+                        Tambah Voucher Destinasi
                     </Heading>
                 </CardHeader>
                 <form onSubmit={submit}>
                     <CardBody pb={0}>
-                        <FormControl mb={3} isInvalid={errors.nama}>
-                            <FormLabel htmlFor="nama" fontSize={"sm"}>
-                                Nama
+                        <FormControl mb={3} isInvalid={errors.kode}>
+                            <FormLabel htmlFor="kode" fontSize={"sm"}>
+                                Kode
                                 <Text display={"inline"} color="red">
                                     *
                                 </Text>
                             </FormLabel>
                             <Input
                                 type="text"
-                                id="nama"
-                                value={data.nama}
+                                id="kode"
+                                value={data.kode}
                                 onChange={(e) =>
-                                    setData("nama", e.target.value)
+                                    setData("kode", e.target.value)
                                 }
                             />
-                            {errors.nama && (
+                            {errors.kode && (
                                 <FormErrorMessage fontSize={"xs"}>
-                                    {errors.nama}
+                                    {errors.kode}
                                 </FormErrorMessage>
                             )}
                         </FormControl>
@@ -87,97 +91,99 @@ const CreateDestination = ({ auth, sessions, categories }) => {
                                 </FormErrorMessage>
                             )}
                         </FormControl>
-                        <FormControl mb={3} isInvalid={errors.category_id}>
-                            <FormLabel htmlFor="category_id" fontSize={"sm"}>
-                                Kategori
-                                <Text display={"inline"} color="red">
-                                    *
-                                </Text>
-                            </FormLabel>
-                            <Select
-                                type="text"
-                                id="category_id"
-                                value={data.category_id}
-                                onChange={(e) =>
-                                    setData("category_id", e.target.value)
-                                }
-                            >
-                                <option value="">Pilih Kategori</option>
-                                {categories.map((option) => (
-                                    <option
-                                        key={option.uuid}
-                                        value={option.uuid}
-                                    >
-                                        {option.nama}
-                                    </option>
-                                ))}
-                            </Select>
-                            {errors.category_id && (
-                                <FormErrorMessage fontSize={"xs"}>
-                                    {errors.category_id}
-                                </FormErrorMessage>
-                            )}
-                        </FormControl>
-                        <FormControl mb={3} isInvalid={errors.lokasi}>
-                            <FormLabel htmlFor="lokasi" fontSize={"sm"}>
-                                Lokasi
-                                <Text display={"inline"} color="red">
-                                    *
-                                </Text>
-                            </FormLabel>
-                            <Input
-                                type="text"
-                                id="lokasi"
-                                value={data.lokasi}
-                                onChange={(e) =>
-                                    setData("lokasi", e.target.value)
-                                }
-                            />
-                            {errors.lokasi && (
-                                <FormErrorMessage fontSize={"xs"}>
-                                    {errors.lokasi}
-                                </FormErrorMessage>
-                            )}
-                        </FormControl>
-                        <FormControl mb={3} isInvalid={errors.link_youtube}>
-                            <FormLabel htmlFor="link_youtube" fontSize={"sm"}>
-                                Link Youtube
-                                <Text display={"inline"} color="red">
-                                    *
-                                </Text>
-                            </FormLabel>
-                            <Input
-                                type="text"
-                                id="link_youtube"
-                                value={data.link_youtube}
-                                onChange={(e) =>
-                                    setData("link_youtube", e.target.value)
-                                }
-                            />
-                            {errors.link_youtube && (
-                                <FormErrorMessage fontSize={"xs"}>
-                                    {errors.link_youtube}
-                                </FormErrorMessage>
-                            )}
-                        </FormControl>
-                        <FormControl mb={3} isInvalid={errors.rating}>
-                            <FormLabel htmlFor="rating" fontSize={"sm"}>
-                                Rating
+                        <FormControl mb={3} isInvalid={errors.diskon}>
+                            <FormLabel htmlFor="diskon" fontSize={"sm"}>
+                                Diskon
                                 <Text display={"inline"} color="red">
                                     *
                                 </Text>
                             </FormLabel>
                             <Input
                                 type="number"
-                                id="rating"
-                                value={data.rating}
+                                id="diskon"
+                                value={data.diskon}
                                 onChange={(e) =>
-                                    setData("rating", e.target.value)
+                                    setData("diskon", e.target.value)
                                 }
                             />
-                            {errors.rating && (
+                            {errors.diskon && (
                                 <FormErrorMessage fontSize={"xs"}>
-                                    {errors.rating}
+                                    {errors.diskon}
+                                </FormErrorMessage>
+                            )}
+                        </FormControl>
+                        <FormControl mb={3} isInvalid={errors.kuota}>
+                            <FormLabel htmlFor="kuota" fontSize={"sm"}>
+                                Kuota
+                                <Text display={"inline"} color="red">
+                                    *
+                                </Text>
+                            </FormLabel>
+                            <Input
+                                type="number"
+                                id="kuota"
+                                value={data.kuota}
+                                onChange={(e) =>
+                                    setData("kuota", e.target.value)
+                                }
+                            />
+                            {errors.kuota && (
+                                <FormErrorMessage fontSize={"xs"}>
+                                    {errors.kuota}
+                                </FormErrorMessage>
+                            )}
+                        </FormControl>
+                        <FormControl
+                            mb={3}
+                            isInvalid={errors.tanggal_kadaluarsa}
+                        >
+                            <FormLabel
+                                htmlFor="tanggal_kadaluarsa"
+                                fontSize={"sm"}
+                            >
+                                Tanggal Kadaluarsa
+                                <Text display={"inline"} color="red">
+                                    *
+                                </Text>
+                            </FormLabel>
+                            <Input
+                                type="date"
+                                id="tanggal_kadaluarsa"
+                                value={data.tanggal_kadaluarsa}
+                                onChange={(e) =>
+                                    setData(
+                                        "tanggal_kadaluarsa",
+                                        e.target.value
+                                    )
+                                }
+                            />
+                            {errors.tanggal_kadaluarsa && (
+                                <FormErrorMessage fontSize={"xs"}>
+                                    {errors.tanggal_kadaluarsa}
+                                </FormErrorMessage>
+                            )}
+                        </FormControl>
+                        <FormControl mb={3} isInvalid={errors.status}>
+                            <FormLabel htmlFor="status" fontSize={"sm"}>
+                                Status
+                                <Text display={"inline"} color="red">
+                                    *
+                                </Text>
+                            </FormLabel>
+                            <Select
+                                id="status"
+                                value={data.status}
+                                onChange={(e) =>
+                                    setData("status", e.target.value)
+                                }
+                            >
+                                <option value="">Pilih Status</option>
+                                <option value="1">Aktif</option>
+                                <option value="0">Tidak Aktif</option>
+                            </Select>
+                            {errors.status && (
+                                <FormErrorMessage fontSize={"xs"}>
+                                    {errors.status}
                                 </FormErrorMessage>
                             )}
                         </FormControl>
@@ -194,7 +200,7 @@ const CreateDestination = ({ auth, sessions, categories }) => {
                         </Button>
                         <Button
                             as={Link}
-                            href={"/admin/destination"}
+                            href={"/destination/" + kode}
                             colorScheme="gray"
                             ml={3}
                         >
@@ -208,4 +214,4 @@ const CreateDestination = ({ auth, sessions, categories }) => {
     );
 };
 
-export default CreateDestination;
+export default CreateDestinationVoucher;

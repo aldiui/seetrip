@@ -1,5 +1,5 @@
 import React from "react";
-import { Head, Link, useForm, usePage } from "@inertiajs/react";
+import { Head, Link, useForm } from "@inertiajs/react";
 import {
     Button,
     Card,
@@ -14,34 +14,28 @@ import {
     Input,
     Select,
     Text,
-    Textarea,
 } from "@chakra-ui/react";
 import { ArrowLeftIcon, BookmarkIcon } from "@heroicons/react/16/solid";
 import AdminLayout from "../../../../Layouts/AdminLayout ";
 
-const CreateDestinationPrice = ({ auth, sessions }) => {
-    const { url } = usePage();
-    const kode = new URLSearchParams(url.split("?")[1]).get("kode");
-
-    const { data, setData, post, processing, errors } = useForm({
-        nama: "",
-        deskripsi: "",
-        harga: "",
-        destination_id: kode,
+const EditDestinationFacility = ({ auth, sessions, destinationFacility }) => {
+    const { data, setData, put, processing, errors } = useForm({
+        tipe: destinationFacility.tipe,
+        nama: destinationFacility.nama,
     });
 
     const submit = (e) => {
         e.preventDefault();
-        post("/admin/destination-price");
+        put(`/destination-facility/${destinationFacility.uuid}`);
     };
 
     return (
         <AdminLayout auth={auth} sessions={sessions}>
-            <Head title="Tambah Harga Destinasi" />
+            <Head title="Edit Fasilitas Destinasi" />
             <Card maxW={"xl"} w="full" p={2} h={"auto"}>
                 <CardHeader pb={0}>
                     <Heading size="md" fontWeight="bold">
-                        Tambah Harga Destinasi
+                        Edit Fasilitas Destinasi
                     </Heading>
                 </CardHeader>
                 <form onSubmit={submit}>
@@ -67,45 +61,29 @@ const CreateDestinationPrice = ({ auth, sessions }) => {
                                 </FormErrorMessage>
                             )}
                         </FormControl>
-                        <FormControl mb={3} isInvalid={errors.deskripsi}>
-                            <FormLabel htmlFor="deskripsi" fontSize={"sm"}>
-                                Deskripsi
+
+                        <FormControl mb={3} isInvalid={errors.tipe}>
+                            <FormLabel htmlFor="tipe" fontSize={"sm"}>
+                                Tipe
                                 <Text display={"inline"} color="red">
                                     *
                                 </Text>
                             </FormLabel>
-                            <Textarea
+                            <Select
                                 type="text"
-                                id="deskripsi"
-                                value={data.deskripsi}
+                                id="tipe"
+                                value={data.tipe}
                                 onChange={(e) =>
-                                    setData("deskripsi", e.target.value)
+                                    setData("tipe", e.target.value)
                                 }
-                            ></Textarea>
-                            {errors.deskripsi && (
+                            >
+                                <option value="">Pilih Tipe</option>
+                                <option value="Fasilitas">Fasilitas</option>
+                                <option value="Akomodasi">Akomodasi</option>
+                            </Select>
+                            {errors.tipe && (
                                 <FormErrorMessage fontSize={"xs"}>
-                                    {errors.deskripsi}
-                                </FormErrorMessage>
-                            )}
-                        </FormControl>
-                        <FormControl mb={3} isInvalid={errors.harga}>
-                            <FormLabel htmlFor="harga" fontSize={"sm"}>
-                                Harga
-                                <Text display={"inline"} color="red">
-                                    *
-                                </Text>
-                            </FormLabel>
-                            <Input
-                                type="number"
-                                id="harga"
-                                value={data.harga}
-                                onChange={(e) =>
-                                    setData("harga", e.target.value)
-                                }
-                            />
-                            {errors.harga && (
-                                <FormErrorMessage fontSize={"xs"}>
-                                    {errors.harga}
+                                    {errors.tipe}
                                 </FormErrorMessage>
                             )}
                         </FormControl>
@@ -122,7 +100,10 @@ const CreateDestinationPrice = ({ auth, sessions }) => {
                         </Button>
                         <Button
                             as={Link}
-                            href={"/admin/destination/" + kode}
+                            href={
+                                "/destination/" +
+                                destinationFacility.destination_uuid
+                            }
                             colorScheme="gray"
                             ml={3}
                         >
@@ -136,4 +117,4 @@ const CreateDestinationPrice = ({ auth, sessions }) => {
     );
 };
 
-export default CreateDestinationPrice;
+export default EditDestinationFacility;

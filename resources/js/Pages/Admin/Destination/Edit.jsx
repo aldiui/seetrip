@@ -19,15 +19,8 @@ import {
 import { ArrowLeftIcon, BookmarkIcon } from "@heroicons/react/16/solid";
 import AdminLayout from "../../../Layouts/AdminLayout ";
 
-const EditDestination = ({
-    auth,
-    sessions,
-    destination,
-    users,
-    categories,
-}) => {
+const EditDestination = ({ auth, sessions, destination, categories }) => {
     const { data, setData, put, processing, errors } = useForm({
-        user_id: destination.user_uuid,
         category_id: destination.category_uuid,
         nama: destination.nama,
         deskripsi: destination.deskripsi,
@@ -91,37 +84,6 @@ const EditDestination = ({
                             {errors.deskripsi && (
                                 <FormErrorMessage fontSize={"xs"}>
                                     {errors.deskripsi}
-                                </FormErrorMessage>
-                            )}
-                        </FormControl>
-                        <FormControl mb={3} isInvalid={errors.user_id}>
-                            <FormLabel htmlFor="user_id" fontSize={"sm"}>
-                                Pemilik
-                                <Text display={"inline"} color="red">
-                                    *
-                                </Text>
-                            </FormLabel>
-                            <Select
-                                type="text"
-                                id="user_id"
-                                value={data.user_id}
-                                onChange={(e) =>
-                                    setData("user_id", e.target.value)
-                                }
-                            >
-                                <option value="">Pilih Pemilik</option>
-                                {users.map((option) => (
-                                    <option
-                                        key={option.uuid}
-                                        value={option.uuid}
-                                    >
-                                        {option.nama}
-                                    </option>
-                                ))}
-                            </Select>
-                            {errors.user_id && (
-                                <FormErrorMessage fontSize={"xs"}>
-                                    {errors.user_id}
                                 </FormErrorMessage>
                             )}
                         </FormControl>

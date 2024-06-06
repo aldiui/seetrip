@@ -7,7 +7,9 @@ import {
     useDisclosure,
 } from "@chakra-ui/react";
 import {
+    ArrowDownCircleIcon,
     BookOpenIcon,
+    CurrencyDollarIcon,
     HomeIcon,
     MapPinIcon,
     UserCircleIcon,
@@ -20,7 +22,11 @@ import MobileNav from "./MobileNav";
 const SidebarNav = ({ children, auth }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const userNav = [
+        { name: "Dashboard", icon: HomeIcon, href: "/dashboard" },
+        { name: "Destinasi", icon: MapPinIcon, href: "/destination" },
         { name: "Wallet", icon: WalletIcon, href: "/wallet" },
+        { name: "Transaksi", icon: CurrencyDollarIcon, href: "/transaction" },
+        { name: "Penarikan", icon: ArrowDownCircleIcon, href: "/withdraw" },
         { name: "Profile", icon: UserCircleIcon, href: "/profile" },
     ];
 
@@ -28,6 +34,9 @@ const SidebarNav = ({ children, auth }) => {
         { name: "Dashboard", icon: HomeIcon, href: "/admin" },
         { name: "User", icon: UserGroupIcon, href: "/admin/user" },
         { name: "Kategori", icon: BookOpenIcon, href: "/admin/category" },
+        { name: "Wallet", icon: WalletIcon, href: "/admin/wallet" },
+        { name: "Transaksi", icon: CurrencyDollarIcon, href: "/transaction" },
+        { name: "Penarikan", icon: ArrowDownCircleIcon, href: "/withdraw" },
         { name: "Destinasi", icon: MapPinIcon, href: "/admin/destination" },
         { name: "Profile", icon: UserCircleIcon, href: "/admin/profile" },
     ];

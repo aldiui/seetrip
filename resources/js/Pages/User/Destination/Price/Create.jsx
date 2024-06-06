@@ -32,7 +32,7 @@ const CreateDestinationPrice = ({ auth, sessions }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        post("/admin/destination-price");
+        post("/destination-price");
     };
 
     return (
@@ -122,7 +122,7 @@ const CreateDestinationPrice = ({ auth, sessions }) => {
                         </Button>
                         <Button
                             as={Link}
-                            href={"/admin/destination/" + kode}
+                            href={"/destination/" + kode}
                             colorScheme="gray"
                             ml={3}
                         >

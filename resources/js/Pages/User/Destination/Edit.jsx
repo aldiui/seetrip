@@ -19,28 +19,28 @@ import {
 import { ArrowLeftIcon, BookmarkIcon } from "@heroicons/react/16/solid";
 import AdminLayout from "../../../Layouts/AdminLayout ";
 
-const CreateDestination = ({ auth, sessions, categories }) => {
-    const { data, setData, post, processing, errors } = useForm({
-        category_id: "",
-        nama: "",
-        deskripsi: "",
-        link_youtube: "",
-        lokasi: "",
-        rating: "",
+const EditDestination = ({ auth, sessions, destination, categories }) => {
+    const { data, setData, put, processing, errors } = useForm({
+        category_id: destination.category_uuid,
+        nama: destination.nama,
+        deskripsi: destination.deskripsi,
+        link_youtube: destination.link_youtube,
+        lokasi: destination.lokasi,
+        rating: destination.rating,
     });
 
     const submit = (e) => {
         e.preventDefault();
-        post("/admin/destination");
+        put(`/destination/${destination.uuid}`);
     };
 
     return (
         <AdminLayout auth={auth} sessions={sessions}>
-            <Head title="Tambah Destinasi" />
+            <Head title="Edit Destinasi" />
             <Card maxW={"xl"} w="full" p={2} h={"auto"}>
                 <CardHeader pb={0}>
                     <Heading size="md" fontWeight="bold">
-                        Tambah Destinasi
+                        Edit Destinasi
                     </Heading>
                 </CardHeader>
                 <form onSubmit={submit}>
@@ -194,7 +194,7 @@ const CreateDestination = ({ auth, sessions, categories }) => {
                         </Button>
                         <Button
                             as={Link}
-                            href={"/admin/destination"}
+                            href={"/destination"}
                             colorScheme="gray"
                             ml={3}
                         >
@@ -208,4 +208,4 @@ const CreateDestination = ({ auth, sessions, categories }) => {
     );
 };
 
-export default CreateDestination;
+export default EditDestination;

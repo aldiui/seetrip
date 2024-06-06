@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Destination;
@@ -12,7 +12,7 @@ class DestinationVoucherController extends Controller
 {
     public function create()
     {
-        return Inertia::render('Admin/Destination/Voucher/Create');
+        return Inertia::render('User/Destination/Voucher/Create');
     }
 
     public function store(Request $request)
@@ -39,13 +39,13 @@ class DestinationVoucherController extends Controller
             'status' => $request->input('status'),
         ]);
 
-        return redirect('/admin/destination/' . $destination->uuid)->with('success', 'Destinasi Voucher Berhasil ditambahkan');
+        return redirect('/destination/' . $destination->uuid)->with('success', 'Destinasi Voucher Berhasil ditambahkan');
     }
 
     public function edit($uuid)
     {
         $destinationVoucher = Voucher::whereUuid($uuid)->firstOrFail();
-        return Inertia::render('Admin/Destination/Voucher/Edit', compact('destinationVoucher'));
+        return Inertia::render('User/Destination/Voucher/Edit', compact('destinationVoucher'));
     }
 
     public function update(Request $request, $uuid)
@@ -62,7 +62,7 @@ class DestinationVoucherController extends Controller
         ]);
 
         $destinationVoucher->update($request->only('destination_id', 'kode', 'deskripsi', 'diskon', 'kuota', 'tanggal_kadaluarsa', 'status'));
-        return redirect('/admin/destination/' . $destinationVoucher->destination->uuid)->with('success', 'Destinasi Voucher Berhasil diubah');
+        return redirect('/destination/' . $destinationVoucher->destination->uuid)->with('success', 'Destinasi Voucher Berhasil diubah');
     }
 
     public function destroy($uuid)
