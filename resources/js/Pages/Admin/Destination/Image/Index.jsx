@@ -1,0 +1,138 @@
+import React from "react";
+import {
+    Table,
+    TableContainer,
+    Thead,
+    Tbody,
+    Tr,
+    Th,
+    Td,
+    Button,
+    Flex,
+    Icon,
+    Heading,
+    Image,
+} from "@chakra-ui/react";
+import { Link } from "@inertiajs/react";
+import { PencilSquareIcon, PlusIcon } from "@heroicons/react/16/solid";
+import DeleteButton from "../../../../Components/DeleteButton";
+
+const DestinationImage = ({ destination }) => {
+    return (
+        <>
+            <Flex justifyContent={"space-between"} alignItems={"center"} mb={4}>
+                <Heading size="md" fontWeight="bold">
+                    Data Gambar
+                </Heading>
+                <Button
+                    as={Link}
+                    href={
+                        "/admin/destination-image/create?kode=" +
+                        destination.uuid
+                    }
+                    colorScheme="green"
+                    size={"sm"}
+                >
+                    <Icon as={PlusIcon} name="plus" mr={2} /> Tambah
+                </Button>
+            </Flex>
+            <TableContainer>
+                <Table variant="striped" colorScheme="gray" width="full">
+                    <Thead>
+                        <Tr
+                            borderBottom={"2px"}
+                            borderColor={"blue.500"}
+                            bg={"blue.500"}
+                        >
+                            <Th
+                                fontWeight="extrabold"
+                                fontSize="md"
+                                color="white"
+                                w={5}
+                            >
+                                #
+                            </Th>
+                            <Th
+                                fontWeight="extrabold"
+                                fontSize="md"
+                                color="white"
+                            >
+                                Gambar
+                            </Th>
+                            <Th
+                                fontWeight="extrabold"
+                                fontSize="md"
+                                color="white"
+                                w={10}
+                            >
+                                Aksi
+                            </Th>
+                        </Tr>
+                    </Thead>
+                    <Tbody verticalAlign={"top"}>
+                        {!destination.destination_images ||
+                        destination.destination_images.length === 0 ? (
+                            <Tr>
+                                <Td colSpan={4} textAlign="center">
+                                    No data found
+                                </Td>
+                            </Tr>
+                        ) : (
+                            destination.destination_images.map(
+                                (image, index) => (
+                                    <Tr key={index}>
+                                        <Td>{index + 1}</Td>
+                                        <Td>
+                                            <Image
+                                                size="md"
+                                                src={`${image.image}`}
+                                                alt="Avatar"
+                                                w="80"
+                                            />
+                                        </Td>
+                                        <Td>
+                                            <Flex
+                                                justifyContent={"space-between"}
+                                                alignItems={"center"}
+                                            >
+                                                <Link
+                                                    href={
+                                                        "/admin/destination-image/" +
+                                                        image.uuid +
+                                                        "/edit"
+                                                    }
+                                                >
+                                                    <Button
+                                                        colorScheme="yellow"
+                                                        size={"sm"}
+                                                        mr={3}
+                                                    >
+                                                        <Icon
+                                                            as={
+                                                                PencilSquareIcon
+                                                            }
+                                                            mr={2}
+                                                        />
+                                                        Edit
+                                                    </Button>
+                                                </Link>
+                                                <DeleteButton
+                                                    uri={
+                                                        "/admin/destination-image/" +
+                                                        image.uuid
+                                                    }
+                                                />
+                                            </Flex>
+                                        </Td>
+                                    </Tr>
+                                )
+                            )
+                        )}
+                    </Tbody>
+                </Table>
+            </TableContainer>
+        </>
+    );
+};
+
+export default DestinationImage;
