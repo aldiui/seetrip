@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Head, Link, useForm } from "@inertiajs/react";
+import { Head, Link, useForm, usePage } from "@inertiajs/react";
 import {
     Box,
     Button,
@@ -18,21 +18,19 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import { ArrowLeftIcon, BookmarkIcon } from "@heroicons/react/16/solid";
-import AdminLayout from "../../../Layouts/AdminLayout ";
 import { useDropzone } from "react-dropzone";
+import AdminLayout from "../../../Layouts/AdminLayout ";
 
-const CreateCategory = ({ auth, sessions }) => {
+const CreateDestinationImage = ({ auth, sessions }) => {
     const toast = useToast();
+    const { url } = usePage();
     const [preview, setPreview] = useState(null);
-    const { data, setData, post, processing, errors } = useForm({
-        nama: "",
-        avatar: "",
-    });
+    const kode = new URLSearchParams(url.split("?")[1]).get("kode");
 
-    const submit = (e) => {
-        e.preventDefault();
-        post("/admin/category");
-    };
+    const { data, setData, post, processing, errors } = useForm({
+        image: "",
+        destination_id: kode,
+    });
 
     const onDrop = (acceptedFiles, fileRejections) => {
         if (fileRejections.length > 0) {
@@ -65,7 +63,7 @@ const CreateCategory = ({ auth, sessions }) => {
 
         const file = acceptedFiles[0];
         if (file) {
-            setData("avatar", file);
+            setData("image", file);
 
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -82,20 +80,28 @@ const CreateCategory = ({ auth, sessions }) => {
         multiple: false,
     });
 
+    const submit = (e) => {
+        e.preventDefault();
+        post("/destination-image");
+    };
+
     return (
         <AdminLayout auth={auth} sessions={sessions}>
-            <Head title="Tambah Kategori" />
+            <Head title="Tambah Gambar Destinasi" />
             <Card maxW={"xl"} w="full" p={2} h={"auto"}>
                 <CardHeader pb={0}>
                     <Heading size="md" fontWeight="bold">
-                        Tambah Kategori
+                        Tambah Gambar Destinasi
                     </Heading>
                 </CardHeader>
                 <form onSubmit={submit}>
                     <CardBody pb={0}>
-                        <FormControl mb={3} isInvalid={errors.avatar}>
-                            <FormLabel htmlFor="avatar" fontSize={"sm"}>
-                                Avatar
+                        <FormControl mb={3} isInvalid={errors.image}>
+                            <FormLabel htmlFor="image" fontSize={"sm"}>
+                                Gambar{" "}
+                                <Text display={"inline"} color="red">
+                                    *
+                                </Text>
                             </FormLabel>
                             <Box
                                 {...getRootProps()}
@@ -127,30 +133,9 @@ const CreateCategory = ({ auth, sessions }) => {
                                     />
                                 )}
                             </Box>
-                            {errors.avatar && (
+                            {errors.image && (
                                 <FormErrorMessage fontSize={"xs"}>
-                                    {errors.avatar}
-                                </FormErrorMessage>
-                            )}
-                        </FormControl>
-                        <FormControl mb={3} isInvalid={errors.nama}>
-                            <FormLabel htmlFor="nama" fontSize={"sm"}>
-                                Nama
-                                <Text display={"inline"} color="red">
-                                    *
-                                </Text>
-                            </FormLabel>
-                            <Input
-                                type="text"
-                                id="nama"
-                                value={data.nama}
-                                onChange={(e) =>
-                                    setData("nama", e.target.value)
-                                }
-                            />
-                            {errors.nama && (
-                                <FormErrorMessage fontSize={"xs"}>
-                                    {errors.nama}
+                                    {errors.image}
                                 </FormErrorMessage>
                             )}
                         </FormControl>
@@ -167,7 +152,7 @@ const CreateCategory = ({ auth, sessions }) => {
                         </Button>
                         <Button
                             as={Link}
-                            href={"/admin/category"}
+                            href={"/destination/" + kode}
                             colorScheme="gray"
                             ml={3}
                         >
@@ -181,4 +166,4 @@ const CreateCategory = ({ auth, sessions }) => {
     );
 };
 
-export default CreateCategory;
+export default CreateDestinationImage;

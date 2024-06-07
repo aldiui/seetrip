@@ -89,6 +89,7 @@ class Destination extends Model
         $category = $this->category;
         $array['user_uuid'] = $user->uuid;
         $array['category_uuid'] = $category->uuid;
+        $array['video_embed'] = $this->link_video_youtube ? convertToEmbedUrl($this->link_video_youtube) : null;
 
         return $array;
     }

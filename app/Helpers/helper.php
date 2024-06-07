@@ -26,3 +26,13 @@ if (!function_exists('formatRupiah')) {
         return $formatted;
     }
 }
+
+if (!function_exists('convertToEmbedUrl')) {
+    function convertToEmbedUrl($url)
+    {
+        if (preg_match('/youtu.be\/([^\?]*)/', $url, $match) || preg_match('/youtube.com\/watch\?v=([^\&\?\/]+)/', $url, $match)) {
+            return 'https://www.youtube.com/embed/' . $match[1];
+        }
+        return $url;
+    }
+}

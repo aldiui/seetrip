@@ -85,8 +85,7 @@ const Wisata = ({ auth, sessions, categories, destinations }) => {
                     <Select
                         width={{ base: "100%", md: "auto" }}
                         mb={{ base: 2, md: 0 }}
-                        onChange={(e) => handleChangeCategory}
-                        value={category}
+                        onChange={handleChangeCategory}
                     >
                         <option value="">Semua Kategori</option>
                         {categories.map((option) => (

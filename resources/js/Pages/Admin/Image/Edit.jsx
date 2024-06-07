@@ -14,13 +14,12 @@ import {
     Icon,
     Image,
     Input,
-    Select,
     Text,
     useToast,
 } from "@chakra-ui/react";
 import { ArrowLeftIcon, BookmarkIcon } from "@heroicons/react/16/solid";
-import AdminLayout from "../../../../Layouts/AdminLayout ";
 import { useDropzone } from "react-dropzone";
+import AdminLayout from "../../../Layouts/AdminLayout ";
 
 const EditDestinationImage = ({ auth, sessions, destinationImage }) => {
     const toast = useToast();

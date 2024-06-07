@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Head } from "@inertiajs/react";
+import { Head, Link, router, useForm } from "@inertiajs/react";
 import AppLayout from "../../Layouts/AppLayout";
+import ReactPlayer from "react-player";
 import {
     Badge,
     Box,
@@ -39,6 +40,7 @@ import {
     MapPinIcon,
     XMarkIcon,
 } from "@heroicons/react/16/solid";
+import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa";
 
 const ShowWisata = ({ auth, sessions, destination }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -114,46 +116,65 @@ const ShowWisata = ({ auth, sessions, destination }) => {
         }
     };
 
+    const checkOut = () => {
+        router.post("/check-out", {
+            destination: destination.uuid,
+            destination_price: selectedPackage,
+            quantitas: numberOfPeople,
+        });
+    };
+
     return (
         <AppLayout auth={auth} sessions={sessions}>
             <Head title="Detail Wisata" />
             <Box maxW="container.xl" w={"full"} px={6} py={10} minH={"100vh"}>
                 <SimpleGrid mt={50} columns={{ base: 1, xl: 2 }} spacing={8}>
-                    <Box mb={6} position="relative">
-                        <Image
-                            src={
-                                destination.destination_images[
-                                    currentImageIndex
-                                ]?.image
-                            }
-                            alt={destination.nama}
-                            objectFit="cover"
-                            w="100%"
-                            h="500px"
-                        />
-                        <Button
-                            onClick={prevImage}
-                            position="absolute"
-                            top="50%"
-                            left="2%"
-                            transform="translateY(-50%)"
-                            colorScheme="grey"
-                            zIndex="1"
-                        >
-                            <Icon as={ChevronLeftIcon} />
-                        </Button>
-                        <Button
-                            onClick={nextImage}
-                            position="absolute"
-                            top="50%"
-                            right="2%"
-                            transform="translateY(-50%)"
-                            colorScheme="blue"
-                            zIndex="1"
-                        >
-                            <Icon as={ChevronRightIcon} />
-                        </Button>
-                    </Box>
+                    <VStack>
+                        <Box mb={6} position="relative">
+                            <Image
+                                src={
+                                    destination.destination_images[
+                                        currentImageIndex
+                                    ]?.image
+                                }
+                                alt={destination.nama}
+                                objectFit="cover"
+                                w="100%"
+                                h="500px"
+                            />
+                            <Button
+                                onClick={prevImage}
+                                position="absolute"
+                                top="50%"
+                                left="2%"
+                                transform="translateY(-50%)"
+                                colorScheme="grey"
+                                zIndex="1"
+                            >
+                                <Icon as={ChevronLeftIcon} />
+                            </Button>
+                            <Button
+                                onClick={nextImage}
+                                position="absolute"
+                                top="50%"
+                                right="2%"
+                                transform="translateY(-50%)"
+                                colorScheme="blue"
+                                zIndex="1"
+                            >
+                                <Icon as={ChevronRightIcon} />
+                            </Button>
+                        </Box>
+
+                        {destination.link_video_youtube && (
+                            <Box w="100%" mb={5}>
+                                <ReactPlayer
+                                    url={destination.link_video_youtube}
+                                    width="100%"
+                                />
+                            </Box>
+                        )}
+                    </VStack>
                     <VStack spacing={2} align={"start"}>
                         <Text fontSize="xl" fontWeight="bold">
                             {destination.nama}
@@ -171,6 +192,61 @@ const ShowWisata = ({ auth, sessions, destination }) => {
                                 Akomodasi: {akomodasiData.length}
                             </Badge>
                         </Box>
+                        <Flex gap={2} mb={1}>
+                            {destination.link_facebook && (
+                                <Button
+                                    p={2}
+                                    as="a"
+                                    href={destination.link_facebook}
+                                    variant={"outline"}
+                                    shadow={"sm"}
+                                    borderRadius={"full"}
+                                    _hover={{ bg: "blue.600", color: "white" }}
+                                >
+                                    <Icon as={FaFacebook} />
+                                </Button>
+                            )}
+                            {destination.link_instagram && (
+                                <Button
+                                    p={2}
+                                    as="a"
+                                    href={destination.link_instagram}
+                                    variant={"outline"}
+                                    shadow={"sm"}
+                                    borderRadius={"full"}
+                                    _hover={{ bg: "blue.600", color: "white" }}
+                                >
+                                    <Icon as={FaInstagram} />
+                                </Button>
+                            )}
+                            {destination.link_youtube && (
+                                <Button
+                                    p={2}
+                                    as="a"
+                                    href={destination.link_youtube}
+                                    variant={"outline"}
+                                    shadow={"sm"}
+                                    borderRadius={"full"}
+                                    _hover={{ bg: "blue.600", color: "white" }}
+                                >
+                                    <Icon as={FaYoutube} />
+                                </Button>
+                            )}
+                            {destination.link_tiktok && (
+                                <Button
+                                    p={2}
+                                    as="a"
+                                    href={destination.link_tiktok}
+                                    variant={"outline"}
+                                    shadow={"sm"}
+                                    borderRadius={"full"}
+                                    _hover={{ bg: "blue.600", color: "white" }}
+                                >
+                                    <Icon as={FaTiktok} />
+                                </Button>
+                            )}
+                        </Flex>
+
                         <Flex
                             direction={"column"}
                             mb={5}
@@ -182,6 +258,7 @@ const ShowWisata = ({ auth, sessions, destination }) => {
                             </Text>
                             <Text>{destination.deskripsi}</Text>
                         </Flex>
+
                         {fasilitasData.length > 0 && (
                             <Flex
                                 direction={"column"}
@@ -198,8 +275,8 @@ const ShowWisata = ({ auth, sessions, destination }) => {
                                             key={facility.uuid}
                                             border="1px"
                                             borderColor="black"
-                                            px={8}
-                                            py={2}
+                                            px={4}
+                                            py={1}
                                             rounded={"lg"}
                                         >
                                             {facility.nama}
@@ -225,8 +302,8 @@ const ShowWisata = ({ auth, sessions, destination }) => {
                                             key={akomodasi.uuid}
                                             border="1px"
                                             borderColor="black"
-                                            px={8}
-                                            py={2}
+                                            px={4}
+                                            py={1}
                                             rounded={"lg"}
                                         >
                                             {akomodasi.nama}
@@ -296,6 +373,8 @@ const ShowWisata = ({ auth, sessions, destination }) => {
                             direction={"column"}
                             gap={2}
                             textAlign={"left"}
+                            w={"full"}
+                            maxW={"sm"}
                             mt={5}
                         >
                             <Text fontSize={"lg"} fontWeight={"bold"}>
@@ -314,8 +393,8 @@ const ShowWisata = ({ auth, sessions, destination }) => {
                                     </option>
                                 ))}
                             </Select>
-                            <InputGroup size="md" mt={3}>
-                                <InputLeftElement width="4.5rem">
+                            <InputGroup w={"full"} mt={3}>
+                                <InputLeftElement>
                                     <Button
                                         h="1.75rem"
                                         size="sm"
@@ -338,7 +417,7 @@ const ShowWisata = ({ auth, sessions, destination }) => {
                                     }
                                     textAlign="center"
                                 />
-                                <InputRightElement width="4.5rem">
+                                <InputRightElement>
                                     <Button
                                         h="1.75rem"
                                         size="sm"
@@ -384,7 +463,7 @@ const ShowWisata = ({ auth, sessions, destination }) => {
                             colorScheme="green"
                             ml={3}
                             onClick={() => {
-                                onClose();
+                                checkOut();
                             }}
                         >
                             <Icon as={CheckIcon} mr={2} />

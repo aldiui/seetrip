@@ -16,12 +16,14 @@ import {
     Input,
     Select,
     Text,
+    useToast,
 } from "@chakra-ui/react";
 import { ArrowLeftIcon, BookmarkIcon } from "@heroicons/react/16/solid";
 import AdminLayout from "../../../Layouts/AdminLayout ";
 import { useDropzone } from "react-dropzone";
 
 const CreateUser = ({ auth, sessions }) => {
+    const toast = useToast();
     const [preview, setPreview] = useState(null);
     const { data, setData, post, processing, errors } = useForm({
         nama: "",
@@ -44,9 +46,23 @@ const CreateUser = ({ auth, sessions }) => {
             fileRejections.forEach((file) => {
                 file.errors.forEach((err) => {
                     if (err.code === "file-too-large") {
-                        console.error("File is too large");
+                        toast({
+                            title: "Error",
+                            status: "error",
+                            description: "File is too large",
+                            duration: 3000,
+                            isClosable: true,
+                            position: "top-right",
+                        });
                     } else if (err.code === "file-invalid-type") {
-                        console.error("Invalid file type");
+                        toast({
+                            title: "Error",
+                            status: "error",
+                            description: "File is invalid type",
+                            duration: 3000,
+                            isClosable: true,
+                            position: "top-right",
+                        });
                     }
                 });
             });
@@ -69,7 +85,7 @@ const CreateUser = ({ auth, sessions }) => {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
         accept: "image/jpg,image/jpeg,image/png",
-        maxSize: 2 * 1024 * 1024,
+        maxSize: 10 * 1024 * 1024,
         multiple: false,
     });
 

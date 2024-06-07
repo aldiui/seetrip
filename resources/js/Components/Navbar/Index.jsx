@@ -37,10 +37,6 @@ const Navbar = ({ auth, sessions }) => {
             label: "Wisata",
             href: "/wisata",
         },
-        {
-            label: "Order",
-            href: "/order",
-        },
     ];
 
     return (

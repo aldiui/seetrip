@@ -21,6 +21,7 @@ import { useDropzone } from "react-dropzone";
 import AdminLayout from "../../../../Layouts/AdminLayout ";
 
 const CreateDestinationImage = ({ auth, sessions }) => {
+    const toast = useToast();
     const { url } = usePage();
     const [preview, setPreview] = useState(null);
     const kode = new URLSearchParams(url.split("?")[1]).get("kode");
@@ -35,9 +36,23 @@ const CreateDestinationImage = ({ auth, sessions }) => {
             fileRejections.forEach((file) => {
                 file.errors.forEach((err) => {
                     if (err.code === "file-too-large") {
-                        console.error("File is too large");
+                        toast({
+                            title: "Error",
+                            status: "error",
+                            description: "File is too large",
+                            duration: 3000,
+                            isClosable: true,
+                            position: "top-right",
+                        });
                     } else if (err.code === "file-invalid-type") {
-                        console.error("Invalid file type");
+                        toast({
+                            title: "Error",
+                            status: "error",
+                            description: "File is invalid type",
+                            duration: 3000,
+                            isClosable: true,
+                            position: "top-right",
+                        });
                     }
                 });
             });
@@ -60,7 +75,7 @@ const CreateDestinationImage = ({ auth, sessions }) => {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
         accept: "image/jpg,image/jpeg,image/png",
-        maxSize: 2 * 1024 * 1024,
+        maxSize: 10 * 1024 * 1024,
         multiple: false,
     });
 

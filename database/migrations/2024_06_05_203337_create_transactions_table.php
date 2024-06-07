@@ -20,9 +20,10 @@ return new class extends Migration
             $table->foreignId('wallet_id')->nullable()->references('id')->on('wallets')->onDelete('set null');
             $table->string('nomor_pemesanan');
             $table->unsignedBigInteger('quantitas');
-            $table->unsignedBigInteger('diskon');
+            $table->unsignedBigInteger('diskon')->nullable();
             $table->unsignedBigInteger('total_harga');
-            $table->string('bukti_bayar');
+            $table->string('bukti_bayar')->nullable();
+            $table->string('nama_pengirim')->nullable();
             $table->enum('status', ['0', '1', '2'])->default('0');
             $table->timestamps();
         });

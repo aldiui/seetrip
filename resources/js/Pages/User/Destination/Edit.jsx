@@ -24,7 +24,11 @@ const EditDestination = ({ auth, sessions, destination, categories }) => {
         category_id: destination.category_uuid,
         nama: destination.nama,
         deskripsi: destination.deskripsi,
+        link_video_youtube: destination.link_video_youtube,
         link_youtube: destination.link_youtube,
+        link_facebook: destination.link_facebook,
+        link_instagram: destination.link_instagram,
+        link_tiktok: destination.link_tiktok,
         lokasi: destination.lokasi,
         rating: destination.rating,
     });
@@ -139,12 +143,36 @@ const EditDestination = ({ auth, sessions, destination, categories }) => {
                                 </FormErrorMessage>
                             )}
                         </FormControl>
+                        <FormControl
+                            mb={3}
+                            isInvalid={errors.link_video_youtube}
+                        >
+                            <FormLabel
+                                htmlFor="link_video_youtube"
+                                fontSize={"sm"}
+                            >
+                                Link Video Youtube
+                            </FormLabel>
+                            <Input
+                                type="text"
+                                id="link_video_youtube"
+                                value={data.link_video_youtube}
+                                onChange={(e) =>
+                                    setData(
+                                        "link_video_youtube",
+                                        e.target.value
+                                    )
+                                }
+                            />
+                            {errors.link_video_youtube && (
+                                <FormErrorMessage fontSize={"xs"}>
+                                    {errors.link_video_youtube}
+                                </FormErrorMessage>
+                            )}
+                        </FormControl>
                         <FormControl mb={3} isInvalid={errors.link_youtube}>
                             <FormLabel htmlFor="link_youtube" fontSize={"sm"}>
                                 Link Youtube
-                                <Text display={"inline"} color="red">
-                                    *
-                                </Text>
                             </FormLabel>
                             <Input
                                 type="text"
@@ -157,6 +185,60 @@ const EditDestination = ({ auth, sessions, destination, categories }) => {
                             {errors.link_youtube && (
                                 <FormErrorMessage fontSize={"xs"}>
                                     {errors.link_youtube}
+                                </FormErrorMessage>
+                            )}
+                        </FormControl>
+                        <FormControl mb={3} isInvalid={errors.link_facebook}>
+                            <FormLabel htmlFor="link_facebook" fontSize={"sm"}>
+                                Link Facebook
+                            </FormLabel>
+                            <Input
+                                type="text"
+                                id="link_facebook"
+                                value={data.link_facebook}
+                                onChange={(e) =>
+                                    setData("link_facebook", e.target.value)
+                                }
+                            />
+                            {errors.link_facebook && (
+                                <FormErrorMessage fontSize={"xs"}>
+                                    {errors.link_facebook}
+                                </FormErrorMessage>
+                            )}
+                        </FormControl>
+                        <FormControl mb={3} isInvalid={errors.link_instagram}>
+                            <FormLabel htmlFor="link_instagram" fontSize={"sm"}>
+                                Link Instagram
+                            </FormLabel>
+                            <Input
+                                type="text"
+                                id="link_instagram"
+                                value={data.link_instagram}
+                                onChange={(e) =>
+                                    setData("link_instagram", e.target.value)
+                                }
+                            />
+                            {errors.link_instagram && (
+                                <FormErrorMessage fontSize={"xs"}>
+                                    {errors.link_instagram}
+                                </FormErrorMessage>
+                            )}
+                        </FormControl>
+                        <FormControl mb={3} isInvalid={errors.link_instagram}>
+                            <FormLabel htmlFor="link_tiktok" fontSize={"sm"}>
+                                Link Tiktok
+                            </FormLabel>
+                            <Input
+                                type="text"
+                                id="link_tiktok"
+                                value={data.link_tiktok}
+                                onChange={(e) =>
+                                    setData("link_tiktok", e.target.value)
+                                }
+                            />
+                            {errors.link_tiktok && (
+                                <FormErrorMessage fontSize={"xs"}>
+                                    {errors.link_tiktok}
                                 </FormErrorMessage>
                             )}
                         </FormControl>

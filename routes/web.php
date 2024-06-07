@@ -9,6 +9,7 @@ Route::get('/wisata/{uuid}', [App\Http\Controllers\WisataController::class, 'sho
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [App\Http\Controllers\AuthController::class, 'logout']);
+    Route::resource('/check-out', App\Http\Controllers\CheckOutController::class)->names('check-out');
 
     Route::middleware(['checkRole:user'])->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
@@ -30,6 +31,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::resource('/category', App\Http\Controllers\Admin\CategoryController::class);
         Route::resource('/user', App\Http\Controllers\Admin\UserController::class);
+        Route::resource('/transaction', App\Http\Controllers\Admin\TransactionController::class);
         Route::resource('/wallet', App\Http\Controllers\Admin\WalletController::class);
         Route::resource('/destination', App\Http\Controllers\Admin\DestinationController::class);
         Route::resource('/destination-image', App\Http\Controllers\Admin\DestinationImageController::class);

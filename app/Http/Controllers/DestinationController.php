@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Inertia\Inertia;
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Destination;
-use Illuminate\Support\Str;
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class DestinationController extends Controller
 {
@@ -107,7 +107,7 @@ class DestinationController extends Controller
 
         $category = Category::whereUuid($request->input('category_id'))->firstOrFail();
 
-        $slug = slug($request->input('nama'), '-');
+        $slug = Str::slug($request->input('nama'), '-');
 
         if ($slug !== $destination->slug) {
             $originalSlug = $slug;

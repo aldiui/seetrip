@@ -111,7 +111,7 @@ class DestinationController extends Controller
 
         $user = User::whereUuid($request->input('user_id'))->firstOrFail();
         $category = Category::whereUuid($request->input('category_id'))->firstOrFail();
-        $slug = slug($request->input('nama'), '-');
+        $slug = Str::slug($request->input('nama'), '-');
 
         if ($slug !== $destination->slug) {
             $originalSlug = $slug;
