@@ -26,7 +26,8 @@ const DestinationFacility = ({ destination }) => {
                 <Button
                     as={Link}
                     href={
-                        "/destination-facility/create?kode=" + destination.uuid
+                        "/user/destination-facility/create?kode=" +
+                        destination.uuid
                     }
                     colorScheme="green"
                     size={"sm"}
@@ -96,7 +97,7 @@ const DestinationFacility = ({ destination }) => {
                                             >
                                                 <Link
                                                     href={
-                                                        "/destination-facility/" +
+                                                        "/user/destination-facility/" +
                                                         facility.uuid +
                                                         "/edit"
                                                     }
@@ -117,7 +118,7 @@ const DestinationFacility = ({ destination }) => {
                                                 </Link>
                                                 <DeleteButton
                                                     uri={
-                                                        "/destination-facility/" +
+                                                        "/user/destination-facility/" +
                                                         facility.uuid
                                                     }
                                                 />

@@ -3,17 +3,11 @@ import { Head, Link, useForm } from "@inertiajs/react";
 import AdminLayout from "../../../Layouts/AdminLayout ";
 import {
     Badge,
-    Button,
     Card,
     CardBody,
     CardHeader,
-    FormControl,
-    FormErrorMessage,
-    FormLabel,
     Heading,
-    Icon,
     Image,
-    Select,
     SimpleGrid,
     Text,
 } from "@chakra-ui/react";

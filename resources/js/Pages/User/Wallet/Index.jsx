@@ -36,7 +36,7 @@ const Wallet = ({ auth, sessions, wallets }) => {
     const getData = () => {
         setIsLoading(true);
         router.get(
-            "/wallet",
+            "/user/wallet",
             pickBy({ perpage: perpage.current, search: search }),
             {
                 onFinish: () => setIsLoading(false),
@@ -53,7 +53,7 @@ const Wallet = ({ auth, sessions, wallets }) => {
         { header: "Nama Bank", accessor: "nama_bank" },
         { header: "Nama Akun", accessor: "nama_akun" },
         { header: "Nomor Rekening", accessor: "nomor_rekening" },
-        { header: "Aksi", accessor: "Aksi", width: "10", uri: "/wallet" },
+        { header: "Aksi", accessor: "Aksi", width: "10", uri: "/user/wallet" },
     ];
 
     return (
@@ -70,7 +70,7 @@ const Wallet = ({ auth, sessions, wallets }) => {
                     </Heading>
                     <Button
                         as={Link}
-                        href="/wallet/create"
+                        href="/user/wallet/create"
                         colorScheme="green"
                         size={"sm"}
                     >

@@ -44,7 +44,7 @@ const Withdraw = ({ auth, sessions, withdraws }) => {
     const getData = () => {
         setIsLoading(true);
         router.get(
-            "/withdraw",
+            "/user/withdraw",
             pickBy({ perpage: perpage.current, search: search }),
             {
                 onFinish: () => setIsLoading(false),
@@ -70,7 +70,7 @@ const Withdraw = ({ auth, sessions, withdraws }) => {
                     </Heading>
                     <Button
                         as={Link}
-                        href="/withdraw/create"
+                        href="/user/withdraw/create"
                         colorScheme="green"
                         size={"sm"}
                     >

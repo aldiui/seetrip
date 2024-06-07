@@ -36,7 +36,7 @@ const Destination = ({ auth, sessions, destinations }) => {
     const getData = () => {
         setIsLoading(true);
         router.get(
-            "/destination",
+            "/user/destination",
             pickBy({ perpage: perpage.current, search: search }),
             {
                 onFinish: () => setIsLoading(false),
@@ -57,7 +57,7 @@ const Destination = ({ auth, sessions, destinations }) => {
             header: "Aksi",
             accessor: "Aksi",
             width: "10",
-            uri: "/destination",
+            uri: "/user/destination",
             show: true,
         },
     ];
@@ -76,7 +76,7 @@ const Destination = ({ auth, sessions, destinations }) => {
                     </Heading>
                     <Button
                         as={Link}
-                        href="/destination/create"
+                        href="/user/destination/create"
                         colorScheme="green"
                         size={"sm"}
                     >

@@ -38,7 +38,7 @@ const EditDestinationImage = ({ auth, sessions, destinationImage }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        post(`/destination-image/${destinationImage.uuid}`);
+        post(`/user/destination-image/${destinationImage.uuid}`);
     };
 
     const onDrop = (acceptedFiles, fileRejections) => {
@@ -157,7 +157,7 @@ const EditDestinationImage = ({ auth, sessions, destinationImage }) => {
                         <Button
                             as={Link}
                             href={
-                                "/destination/" +
+                                "/user/destination/" +
                                 destinationImage.destination_uuid
                             }
                             colorScheme="gray"

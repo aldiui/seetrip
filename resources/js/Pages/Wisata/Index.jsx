@@ -36,9 +36,15 @@ const Wisata = ({ auth, sessions, categories, destinations }) => {
         }
     }, []);
 
+    useEffect(() => {
+        if (category) {
+            getData();
+        }
+    }, [category]);
+
     const handleChangeCategory = (e) => {
         setCategory(e.target.value);
-        getData();
+        setSearch(""); // Clear search when changing category
     };
 
     const handleSearch = (e) => {
@@ -60,11 +66,11 @@ const Wisata = ({ auth, sessions, categories, destinations }) => {
             <Head title="Wisata" />
             <Box
                 maxW="container.xl"
-                w={"full"}
+                w="full"
                 textAlign="center"
                 px={6}
                 py={10}
-                minH={"100vh"}
+                minH="100vh"
             >
                 <Heading fontSize="3xl" mt={50}>
                     Wisata Lebih dari Sekedar Destinasi
@@ -79,10 +85,11 @@ const Wisata = ({ auth, sessions, categories, destinations }) => {
                     direction={{ base: "column", md: "row" }}
                     align="center"
                     gap={4}
-                    w={"full"}
+                    w="full"
                     mb={10}
                 >
                     <Select
+                        value={category}
                         width={{ base: "100%", md: "auto" }}
                         mb={{ base: 2, md: 0 }}
                         onChange={handleChangeCategory}
@@ -98,7 +105,7 @@ const Wisata = ({ auth, sessions, categories, destinations }) => {
                         as="form"
                         gap={2}
                         align="center"
-                        w={"full"}
+                        w="full"
                         onSubmit={handleSearch}
                     >
                         <Input
@@ -107,6 +114,7 @@ const Wisata = ({ auth, sessions, categories, destinations }) => {
                             type="text"
                             flex="1"
                             placeholder="Mau pergi ke mana?"
+                            value={search}
                             onChange={(e) => setSearch(e.target.value)}
                         />
                         <Button
@@ -135,7 +143,7 @@ const Wisata = ({ auth, sessions, categories, destinations }) => {
                             >
                                 <Skeleton height="400px" />
                                 <CardBody>
-                                    <VStack spacing={2} align={"start"}>
+                                    <VStack spacing={2} align="start">
                                         <Skeleton height="20px" width="80%" />
                                         <Skeleton height="20px" width="50%" />
                                         <Flex gap={2}>
@@ -164,7 +172,7 @@ const Wisata = ({ auth, sessions, categories, destinations }) => {
                         ))}
                     </SimpleGrid>
                 ) : destinations.data.length === 0 ? (
-                    <Text py={50} fontSize="lg" mt={4} color={"gray.500"}>
+                    <Text py={50} fontSize="lg" mt={4} color="gray.500">
                         <Icon as={PaperClipIcon} mr={2} />
                         Tidak ada destinasi yang ditemukan.
                     </Text>
@@ -203,7 +211,7 @@ const Wisata = ({ auth, sessions, categories, destinations }) => {
                                         h="400px"
                                     />
                                     <CardBody>
-                                        <VStack spacing={2} align={"start"}>
+                                        <VStack spacing={2} align="start">
                                             <Text
                                                 fontSize="xl"
                                                 fontWeight="bold"

@@ -25,7 +25,10 @@ const DestinationPrice = ({ destination }) => {
                 </Heading>
                 <Button
                     as={Link}
-                    href={"/destination-price/create?kode=" + destination.uuid}
+                    href={
+                        "/user/destination-price/create?kode=" +
+                        destination.uuid
+                    }
                     colorScheme="green"
                     size={"sm"}
                 >
@@ -102,7 +105,7 @@ const DestinationPrice = ({ destination }) => {
                                             >
                                                 <Link
                                                     href={
-                                                        "/destination-price/" +
+                                                        "/user/destination-price/" +
                                                         price.uuid +
                                                         "/edit"
                                                     }
@@ -123,7 +126,7 @@ const DestinationPrice = ({ destination }) => {
                                                 </Link>
                                                 <DeleteButton
                                                     uri={
-                                                        "/destination-price/" +
+                                                        "/user/destination-price/" +
                                                         price.uuid
                                                     }
                                                 />

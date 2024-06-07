@@ -35,7 +35,7 @@ const EditDestination = ({ auth, sessions, destination, categories }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        put(`/destination/${destination.uuid}`);
+        put(`/user/destination/${destination.uuid}`);
     };
 
     return (
@@ -276,7 +276,7 @@ const EditDestination = ({ auth, sessions, destination, categories }) => {
                         </Button>
                         <Button
                             as={Link}
-                            href={"/destination"}
+                            href={"/user/destination"}
                             colorScheme="gray"
                             ml={3}
                         >

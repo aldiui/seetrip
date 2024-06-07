@@ -44,7 +44,7 @@ const Transaction = ({ auth, sessions, transactions }) => {
     const getData = () => {
         setIsLoading(true);
         router.get(
-            "/transaction",
+            "/user/transaction",
             pickBy({ perpage: perpage.current, search: search }),
             {
                 onFinish: () => setIsLoading(false),
@@ -310,7 +310,7 @@ const Transaction = ({ auth, sessions, transactions }) => {
                                                         size="sm"
                                                         mr={2}
                                                         as={Link}
-                                                        href={`/transaction/${transaction.nomor_pemesanan}`}
+                                                        href={`/user/transaction/${transaction.nomor_pemesanan}`}
                                                     >
                                                         <Icon
                                                             as={CheckCircleIcon}

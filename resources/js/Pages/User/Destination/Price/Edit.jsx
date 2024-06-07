@@ -27,7 +27,7 @@ const EditDestinationPrice = ({ auth, sessions, destinationPrice }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        put(`/destination-price/${destinationPrice.uuid}`);
+        put(`/user/destination-price/${destinationPrice.uuid}`);
     };
 
     return (
@@ -118,7 +118,7 @@ const EditDestinationPrice = ({ auth, sessions, destinationPrice }) => {
                         <Button
                             as={Link}
                             href={
-                                "/destination/" +
+                                "/user/destination/" +
                                 destinationPrice.destination_uuid
                             }
                             colorScheme="gray"

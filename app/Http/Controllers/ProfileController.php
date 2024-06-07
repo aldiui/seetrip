@@ -42,7 +42,7 @@ class ProfileController extends Controller
         }
 
         $user = User::with('wallets', 'destinations')->find(auth()->user()->id);
-        return Inertia::render('User/Profile/Index', compact('user'));
+        return Inertia::render('Customer/Profile/Index', compact('user'));
 
     }
 

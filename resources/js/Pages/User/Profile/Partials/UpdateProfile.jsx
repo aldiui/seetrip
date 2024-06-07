@@ -64,7 +64,7 @@ const UpdateProfile = ({ auth }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        post("/profile", {
+        post("/user/profile", {
             preserveScroll: true,
             onSuccess: () => {
                 setData("avatar", "");

@@ -23,17 +23,20 @@ import MobileNav from "./MobileNav";
 const SidebarNav = ({ children, auth }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const userNav = [
-        { name: "Dashboard", icon: HomeIcon, href: "/dashboard" },
-        { name: "Destinasi", icon: MapPinIcon, href: "/destination" },
-        { name: "Wallet", icon: WalletIcon, href: "/wallet" },
-        { name: "Checkout", icon: ShoppingBagIcon, href: "/check-out" },
+        { name: "Dashboard", icon: HomeIcon, href: "/user" },
+        { name: "Destinasi", icon: MapPinIcon, href: "/user/destination" },
+        { name: "Wallet", icon: WalletIcon, href: "/user/wallet" },
         {
-            name: "Transaksi Wisata",
+            name: "Transaksi",
             icon: CurrencyDollarIcon,
-            href: "/transaction",
+            href: "/user/transaction",
         },
-        { name: "Penarikan", icon: ArrowDownCircleIcon, href: "/withdraw" },
-        { name: "Profile", icon: UserCircleIcon, href: "/profile" },
+        {
+            name: "Penarikan",
+            icon: ArrowDownCircleIcon,
+            href: "/user/withdraw",
+        },
+        { name: "Profile", icon: UserCircleIcon, href: "/user/profile" },
     ];
 
     const adminNav = [
@@ -46,7 +49,11 @@ const SidebarNav = ({ children, auth }) => {
             icon: CurrencyDollarIcon,
             href: "/admin/transaction",
         },
-        { name: "Penarikan", icon: ArrowDownCircleIcon, href: "/admin/withdraw" },
+        {
+            name: "Penarikan",
+            icon: ArrowDownCircleIcon,
+            href: "/admin/withdraw",
+        },
         { name: "Destinasi", icon: MapPinIcon, href: "/admin/destination" },
         { name: "Profile", icon: UserCircleIcon, href: "/admin/profile" },
     ];

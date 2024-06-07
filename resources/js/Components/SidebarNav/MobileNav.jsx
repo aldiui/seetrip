@@ -105,7 +105,7 @@ const MobileNav = ({ onOpen, auth, ...rest }) => {
                                 as={Link}
                                 href={
                                     auth.user.role == "user"
-                                        ? "/profile"
+                                        ? "/user/profile"
                                         : "/admin/profile"
                                 }
                             >

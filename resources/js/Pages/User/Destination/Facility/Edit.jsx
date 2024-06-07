@@ -26,7 +26,7 @@ const EditDestinationFacility = ({ auth, sessions, destinationFacility }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        put(`/destination-facility/${destinationFacility.uuid}`);
+        put(`/user/destination-facility/${destinationFacility.uuid}`);
     };
 
     return (
@@ -101,7 +101,7 @@ const EditDestinationFacility = ({ auth, sessions, destinationFacility }) => {
                         <Button
                             as={Link}
                             href={
-                                "/destination/" +
+                                "/user/destination/" +
                                 destinationFacility.destination_uuid
                             }
                             colorScheme="gray"

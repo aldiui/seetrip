@@ -27,7 +27,8 @@ const DestinationVoucher = ({ destination }) => {
                 <Button
                     as={Link}
                     href={
-                        "/destination-voucher/create?kode=" + destination.uuid
+                        "/user/destination-voucher/create?kode=" +
+                        destination.uuid
                     }
                     colorScheme="green"
                     size={"sm"}
@@ -134,7 +135,7 @@ const DestinationVoucher = ({ destination }) => {
                                             >
                                                 <Link
                                                     href={
-                                                        "/destination-voucher/" +
+                                                        "/user/destination-voucher/" +
                                                         vocuher.uuid +
                                                         "/edit"
                                                     }
@@ -155,7 +156,7 @@ const DestinationVoucher = ({ destination }) => {
                                                 </Link>
                                                 <DeleteButton
                                                     uri={
-                                                        "/destination-voucher/" +
+                                                        "/user/destination-voucher/" +
                                                         vocuher.uuid
                                                     }
                                                 />

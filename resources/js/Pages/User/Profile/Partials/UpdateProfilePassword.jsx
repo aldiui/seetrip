@@ -25,7 +25,7 @@ const UpdateProfilePassword = () => {
 
     const submitPassword = (e) => {
         e.preventDefault();
-        put("/profile/password", {
+        put("/user/profile/password", {
             preserveScroll: true,
             onSuccess: () => reset(),
         });

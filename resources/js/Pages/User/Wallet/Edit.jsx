@@ -27,7 +27,7 @@ const EditWallet = ({ auth, sessions, wallet }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        put(`/wallet/${wallet.uuid}`);
+        put(`/user/wallet/${wallet.uuid}`);
     };
 
     const bankOptions = [
@@ -146,7 +146,7 @@ const EditWallet = ({ auth, sessions, wallet }) => {
                         </Button>
                         <Button
                             as={Link}
-                            href={"/wallet"}
+                            href={"/user/wallet"}
                             colorScheme="gray"
                             ml={3}
                         >

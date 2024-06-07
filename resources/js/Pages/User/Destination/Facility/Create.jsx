@@ -30,7 +30,7 @@ const CreateDestinationFacility = ({ auth, sessions }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        post("/destination-facility");
+        post("/user/destination-facility");
     };
 
     return (
@@ -104,7 +104,7 @@ const CreateDestinationFacility = ({ auth, sessions }) => {
                         </Button>
                         <Button
                             as={Link}
-                            href={"/destination/" + kode}
+                            href={"/user/destination/" + kode}
                             colorScheme="gray"
                             ml={3}
                         >

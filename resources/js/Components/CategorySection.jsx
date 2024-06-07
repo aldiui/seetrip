@@ -1,26 +1,40 @@
 import React from "react";
 import {
     Container,
-    Heading,
     Text,
     SimpleGrid,
     Box,
     Image,
     VStack,
+    Flex,
+    Input,
+    Button,
+    Img,
 } from "@chakra-ui/react";
 import { Link } from "@inertiajs/react";
 
 const CategorySection = ({ categories }) => {
     return (
         <Container mt={"80px"} maxW={"container.xl"} px={6} py={10}>
-            <Heading textAlign={"center"} fontSize={"3xl"}>
-                Kategori
-            </Heading>
-            <Text mt={4} mx={10} fontSize={"lg"} textAlign={"center"}>
-                Jelajahi berbagai kategori destinasi menarik yang kami tawarkan.
-                Dari pantai yang menakjubkan hingga pegunungan yang menyejukkan,
-                temukan tempat liburan yang sempurna untuk Anda dan keluarga.
-            </Text>
+            <Img
+                mb={10}
+                src="/images/logo.png"
+                w={200}
+                mx={"auto"}
+                alt="Seetrip Logo"
+            ></Img>
+            <Flex as="form" gap={2} align="center" w={"full"}>
+                <Input
+                    id="search"
+                    name="search"
+                    type="text"
+                    flex="1"
+                    placeholder="Mau pergi ke mana?"
+                />
+                <Button type="submit" colorScheme="blue" loadingText="Cari">
+                    Cari
+                </Button>
+            </Flex>
             <SimpleGrid columns={{ base: 3, md: 3, xl: 4 }} spacing={8} mt={10}>
                 {categories.map((category, index) => (
                     <Link

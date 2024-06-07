@@ -26,7 +26,7 @@ const CreateWithdraw = ({ auth, sessions, wallets }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        post("/withdraw");
+        post("/user/withdraw");
     };
 
     return (
@@ -105,7 +105,7 @@ const CreateWithdraw = ({ auth, sessions, wallets }) => {
                         </Button>
                         <Button
                             as={Link}
-                            href={"/wallet"}
+                            href={"/user/withdraw"}
                             colorScheme="gray"
                             ml={3}
                         >

@@ -26,7 +26,10 @@ const DestinationImage = ({ destination }) => {
                 </Heading>
                 <Button
                     as={Link}
-                    href={"/destination-image/create?kode=" + destination.uuid}
+                    href={
+                        "/user/destination-image/create?kode=" +
+                        destination.uuid
+                    }
                     colorScheme="green"
                     size={"sm"}
                 >
@@ -94,7 +97,7 @@ const DestinationImage = ({ destination }) => {
                                             >
                                                 <Link
                                                     href={
-                                                        "/destination-image/" +
+                                                        "/user/destination-image/" +
                                                         image.uuid +
                                                         "/edit"
                                                     }
@@ -115,7 +118,7 @@ const DestinationImage = ({ destination }) => {
                                                 </Link>
                                                 <DeleteButton
                                                     uri={
-                                                        "/destination-image/" +
+                                                        "/user/destination-image/" +
                                                         image.uuid
                                                     }
                                                 />

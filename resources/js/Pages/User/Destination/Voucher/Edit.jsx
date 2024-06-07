@@ -31,7 +31,7 @@ const EditDestinationVoucher = ({ auth, sessions, destinationVoucher }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        put(`/destination-voucher/${destinationVoucher.uuid}`);
+        put(`/user/destination-voucher/${destinationVoucher.uuid}`);
     };
 
     return (
@@ -197,7 +197,7 @@ const EditDestinationVoucher = ({ auth, sessions, destinationVoucher }) => {
                         <Button
                             as={Link}
                             href={
-                                "/destination/" +
+                                "/user/destination/" +
                                 destinationVoucher.destination_uuid
                             }
                             colorScheme="gray"

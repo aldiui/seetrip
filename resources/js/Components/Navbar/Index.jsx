@@ -17,10 +17,14 @@ import {
     MenuList,
     MenuItem,
     MenuDivider,
-    VStack,
     Container,
 } from "@chakra-ui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/16/solid";
+import {
+    Bars3Icon,
+    HeartIcon,
+    ShoppingBagIcon,
+    XMarkIcon,
+} from "@heroicons/react/16/solid";
 import { Link } from "@inertiajs/react";
 import DesktopNav from "./DeskTopNav";
 import MobileNav from "./MobileNav";
@@ -38,6 +42,13 @@ const Navbar = ({ auth, sessions }) => {
             href: "/wisata",
         },
     ];
+
+    if (sessions && auth && auth.user && auth.user.role === "customer") {
+        listNav.push({
+            label: "Order",
+            href: "/order",
+        });
+    }
 
     return (
         <Box
@@ -132,8 +143,14 @@ const Navbar = ({ auth, sessions }) => {
                                 alignItems={"center"}
                                 justify={"flex-end"}
                                 direction={"row"}
-                                gap={"3"}
+                                gap={"4"}
                             >
+                                <Link href="/order">
+                                    <Icon as={HeartIcon} size="lg" />
+                                </Link>
+                                <Link href="/order">
+                                    <Icon as={ShoppingBagIcon} size="lg" />
+                                </Link>
                                 <Text
                                     display={{ base: "none", md: "flex" }}
                                     fontWeight={"bold"}
@@ -163,13 +180,16 @@ const Navbar = ({ auth, sessions }) => {
                                         <MenuItem
                                             as={Link}
                                             href={
-                                                auth.user.role == "user"
-                                                    ? "/profile"
-                                                    : "/admin/profile"
+                                                auth.user.role === "user"
+                                                    ? "/user/profile"
+                                                    : auth.user.role === "admin"
+                                                    ? "/admin/profile"
+                                                    : "/profile"
                                             }
                                         >
                                             Profile
                                         </MenuItem>
+
                                         <MenuDivider />
                                         <MenuItem
                                             as={Link}

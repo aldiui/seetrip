@@ -117,7 +117,7 @@ const ShowWisata = ({ auth, sessions, destination }) => {
     };
 
     const checkOut = () => {
-        router.post("/check-out", {
+        router.post("/order", {
             destination: destination.uuid,
             destination_price: selectedPackage,
             quantitas: numberOfPeople,

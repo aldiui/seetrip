@@ -27,7 +27,7 @@ const CreateWallet = ({ auth, sessions }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        post("/wallet");
+        post("/user/wallet");
     };
 
     const bankOptions = [
@@ -146,7 +146,7 @@ const CreateWallet = ({ auth, sessions }) => {
                         </Button>
                         <Button
                             as={Link}
-                            href={"/wallet"}
+                            href={"/user/wallet"}
                             colorScheme="gray"
                             ml={3}
                         >

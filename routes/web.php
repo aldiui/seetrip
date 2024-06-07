@@ -9,20 +9,24 @@ Route::get('/wisata/{uuid}', [App\Http\Controllers\WisataController::class, 'sho
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [App\Http\Controllers\AuthController::class, 'logout']);
-    Route::resource('/check-out', App\Http\Controllers\CheckOutController::class)->names('check-out');
-
-    Route::middleware(['checkRole:user'])->group(function () {
-        Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
+    Route::middleware(['checkRole:customer'])->group(function () {
+        Route::resource('/order', App\Http\Controllers\OrderController::class);
         Route::match(['get', 'post'], '/profile', [App\Http\Controllers\ProfileController::class, 'index']);
         Route::put('/profile/password', [App\Http\Controllers\ProfileController::class, 'updatePassword']);
-        Route::resource('/wallet', App\Http\Controllers\WalletController::class);
-        Route::resource('/destination', App\Http\Controllers\DestinationController::class);
-        Route::resource('/destination-image', App\Http\Controllers\DestinationImageController::class);
-        Route::resource('/destination-facility', App\Http\Controllers\DestinationFacilityController::class);
-        Route::resource('/destination-price', App\Http\Controllers\DestinationPriceController::class);
-        Route::resource('/destination-voucher', App\Http\Controllers\DestinationVoucherController::class);
-        Route::resource('/transaction', App\Http\Controllers\TransactionController::class);
-        Route::resource('/withdraw', App\Http\Controllers\WithdrawController::class);
+    });
+
+    Route::prefix('user')->middleware(['checkRole:user'])->group(function () {
+        Route::get('/', [App\Http\Controllers\User\DashboardController::class, 'index']);
+        Route::match(['get', 'post'], '/profile', [App\Http\Controllers\User\ProfileController::class, 'index']);
+        Route::put('/profile/password', [App\Http\Controllers\User\ProfileController::class, 'updatePassword']);
+        Route::resource('/wallet', App\Http\Controllers\User\WalletController::class);
+        Route::resource('/destination', App\Http\Controllers\User\DestinationController::class);
+        Route::resource('/destination-image', App\Http\Controllers\User\DestinationImageController::class);
+        Route::resource('/destination-facility', App\Http\Controllers\User\DestinationFacilityController::class);
+        Route::resource('/destination-price', App\Http\Controllers\User\DestinationPriceController::class);
+        Route::resource('/destination-voucher', App\Http\Controllers\User\DestinationVoucherController::class);
+        Route::resource('/transaction', App\Http\Controllers\User\TransactionController::class);
+        Route::resource('/withdraw', App\Http\Controllers\User\WithdrawController::class);
     });
 
     Route::prefix('admin')->middleware(['checkRole:admin'])->group(function () {

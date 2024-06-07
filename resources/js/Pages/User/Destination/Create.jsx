@@ -35,7 +35,7 @@ const CreateDestination = ({ auth, sessions, categories }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        post("/destination");
+        post("/user/destination");
     };
 
     return (
@@ -276,7 +276,7 @@ const CreateDestination = ({ auth, sessions, categories }) => {
                         </Button>
                         <Button
                             as={Link}
-                            href={"/destination"}
+                            href={"/user/destination"}
                             colorScheme="gray"
                             ml={3}
                         >

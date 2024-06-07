@@ -81,7 +81,7 @@ const CreateDestinationImage = ({ auth, sessions }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        post("/destination-image");
+        post("/user/destination-image");
     };
 
     return (
@@ -151,7 +151,7 @@ const CreateDestinationImage = ({ auth, sessions }) => {
                         </Button>
                         <Button
                             as={Link}
-                            href={"/destination/" + kode}
+                            href={"/user/destination/" + kode}
                             colorScheme="gray"
                             ml={3}
                         >
