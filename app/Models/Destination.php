@@ -57,6 +57,7 @@ class Destination extends Model
 
     public function toSearchableArray(): array
     {
+
         return [
             'nama' => $this->nama,
             'deskripsi' => $this->deskripsi,
@@ -65,7 +66,6 @@ class Destination extends Model
             'rating' => $this->rating,
         ];
     }
-
     public static function boot()
     {
         parent::boot();

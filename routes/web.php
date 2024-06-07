@@ -1,16 +1,17 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Example');
-})->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/wisata', [App\Http\Controllers\WisataController::class, 'index']);
+Route::get('/wisata/{uuid}', [App\Http\Controllers\WisataController::class, 'show']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [App\Http\Controllers\AuthController::class, 'logout']);
 
     Route::middleware(['checkRole:user'])->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
         Route::match(['get', 'post'], '/profile', [App\Http\Controllers\ProfileController::class, 'index']);
         Route::put('/profile/password', [App\Http\Controllers\ProfileController::class, 'updatePassword']);
         Route::resource('/wallet', App\Http\Controllers\WalletController::class);
@@ -22,6 +23,8 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::prefix('admin')->middleware(['checkRole:admin'])->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
+
         Route::match(['get', 'post'], '/profile', [App\Http\Controllers\Admin\ProfileController::class, 'index']);
         Route::put('/profile/password', [App\Http\Controllers\Admin\ProfileController::class, 'updatePassword']);
 
@@ -39,4 +42,8 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['guest'])->group(function () {
     Route::match(['get', 'post'], '/login', [App\Http\Controllers\AuthController::class, 'login'])->name('login');
     Route::match(['get', 'post'], '/register', [App\Http\Controllers\AuthController::class, 'register']);
+});
+
+Route::get('/storage-link', function () {
+    Artisan::call('storage:link');
 });

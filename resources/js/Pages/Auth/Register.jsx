@@ -38,7 +38,7 @@ const Register = ({ sessions }) => {
             <Card maxW="md" w="full" p={2}>
                 <CardHeader pb={0}>
                     <Img
-                        src="/logo.png"
+                        src="/images/logo.png"
                         w={200}
                         mx={"auto"}
                         alt="Seetrip Logo"

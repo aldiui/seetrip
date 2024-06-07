@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Container, VStack, useToast } from "@chakra-ui/react";
+import { VStack, useToast } from "@chakra-ui/react";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar/Index";
 
@@ -28,9 +28,7 @@ const AppLayout = ({ children, auth, sessions }) => {
     return (
         <VStack>
             <Navbar auth={auth} sessions={sessions} />
-            <Container maxW="container.xl" mt={24} minH={"100vh"}>
                 {children}
-            </Container>
             <Footer />
         </VStack>
     );

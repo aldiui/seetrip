@@ -53,6 +53,6 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return redirect('/login')->with('success', 'Logout Berhasil');
+        return back()->with('success', 'Logout Berhasil');
     }
 }
