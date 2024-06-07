@@ -33,12 +33,10 @@ class CheckOutController extends Controller
 
         $cekHarga = DestinationPrice::whereUuid($request->input('destination_price'))->firstOrFail();
 
-        $nomorPemesanan = 'ST-' . random_int(100000, 999999);
-        $cekNomorPemesanan = Transaction::where('nomor_pemesanan', $nomorPemesanan)->first();
-
-        if ($cekNomorPemesanan) {
+        do {
             $nomorPemesanan = 'ST-' . random_int(100000, 999999);
-        }
+            $cekNomorPemesanan = Transaction::where('nomor_pemesanan', $nomorPemesanan)->first();
+        } while ($cekNomorPemesanan);
 
         $checkOut = Transaction::create([
             'user_id' => auth()->user()->id,

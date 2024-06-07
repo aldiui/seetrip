@@ -12,6 +12,7 @@ import {
     CurrencyDollarIcon,
     HomeIcon,
     MapPinIcon,
+    ShoppingBagIcon,
     UserCircleIcon,
     UserGroupIcon,
     WalletIcon,
@@ -25,9 +26,13 @@ const SidebarNav = ({ children, auth }) => {
         { name: "Dashboard", icon: HomeIcon, href: "/dashboard" },
         { name: "Destinasi", icon: MapPinIcon, href: "/destination" },
         { name: "Wallet", icon: WalletIcon, href: "/wallet" },
-        { name: "Checkout", icon: CurrencyDollarIcon, href: "/check-out" },
-        // { name: "Transaksi Wisata", icon: CurrencyDollarIcon, href: "/transaction" },
-        // { name: "Penarikan", icon: ArrowDownCircleIcon, href: "/withdraw" },
+        { name: "Checkout", icon: ShoppingBagIcon, href: "/check-out" },
+        {
+            name: "Transaksi Wisata",
+            icon: CurrencyDollarIcon,
+            href: "/transaction",
+        },
+        { name: "Penarikan", icon: ArrowDownCircleIcon, href: "/withdraw" },
         { name: "Profile", icon: UserCircleIcon, href: "/profile" },
     ];
 
@@ -36,8 +41,12 @@ const SidebarNav = ({ children, auth }) => {
         { name: "User", icon: UserGroupIcon, href: "/admin/user" },
         { name: "Kategori", icon: BookOpenIcon, href: "/admin/category" },
         { name: "Wallet", icon: WalletIcon, href: "/admin/wallet" },
-        { name: "Transaksi", icon: CurrencyDollarIcon, href: "/admin/transaction" },
-        // { name: "Penarikan", icon: ArrowDownCircleIcon, href: "/withdraw" },
+        {
+            name: "Transaksi",
+            icon: CurrencyDollarIcon,
+            href: "/admin/transaction",
+        },
+        { name: "Penarikan", icon: ArrowDownCircleIcon, href: "/admin/withdraw" },
         { name: "Destinasi", icon: MapPinIcon, href: "/admin/destination" },
         { name: "Profile", icon: UserCircleIcon, href: "/admin/profile" },
     ];

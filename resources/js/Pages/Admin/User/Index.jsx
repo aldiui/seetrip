@@ -57,6 +57,7 @@ const User = ({ auth, sessions, users }) => {
         },
         { header: "Nama", accessor: "nama" },
         { header: "Email", accessor: "email" },
+        { header: "Saldo", accessor: "saldo_custom" },
         { header: "Role", accessor: "role" },
         {
             header: "Aksi",

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -24,7 +25,7 @@ class TransactionController extends Controller
 
     public function show($nomorPemesanan)
     {
-        $transaction = Transaction::with(['user', 'destinationPrice', 'destinationPrice.destination', 'voucher', 'wallet'])->where('nomor_pemesanan', $nomorPemesanan)->firstOrFail();
+        $transaction = Transaction::with(['user', 'destinationPrice', 'destinationPrice.destination', 'destinationPrice.destination.user', 'voucher', 'wallet'])->where('nomor_pemesanan', $nomorPemesanan)->firstOrFail();
         return Inertia::render('Admin/Transaction/Show', compact('transaction'));
     }
 
@@ -39,6 +40,15 @@ class TransactionController extends Controller
         $transaction->update([
             'status' => $request->input('status'),
         ]);
+
+        $cekDestinationPrice = $transaction->destinationPrice->destination;
+        $cekUser = User::find($cekDestinationPrice->user_id);
+
+        if ($request->input('status') == 1) {
+            $cekUser->update([
+                'saldo' => $cekUser->saldo + $transaction->total_harga,
+            ]);
+        }
 
         return redirect('/admin/transaction')->with('success', 'Transaksi Berhasil diubah');
     }

@@ -22,7 +22,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'id'
+        'id',
     ];
 
     protected function casts(): array
@@ -80,5 +80,14 @@ class User extends Authenticatable
         });
     }
 
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        $destination = $this->destination;
+        $array['saldo_custom'] = formatRupiah($array['saldo']);
+
+        return $array;
+    }
 
 }

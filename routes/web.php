@@ -21,6 +21,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/destination-facility', App\Http\Controllers\DestinationFacilityController::class);
         Route::resource('/destination-price', App\Http\Controllers\DestinationPriceController::class);
         Route::resource('/destination-voucher', App\Http\Controllers\DestinationVoucherController::class);
+        Route::resource('/transaction', App\Http\Controllers\TransactionController::class);
+        Route::resource('/withdraw', App\Http\Controllers\WithdrawController::class);
     });
 
     Route::prefix('admin')->middleware(['checkRole:admin'])->group(function () {
@@ -32,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/category', App\Http\Controllers\Admin\CategoryController::class);
         Route::resource('/user', App\Http\Controllers\Admin\UserController::class);
         Route::resource('/transaction', App\Http\Controllers\Admin\TransactionController::class);
+        Route::resource('/withdraw', App\Http\Controllers\Admin\WithDrawController::class);
         Route::resource('/wallet', App\Http\Controllers\Admin\WalletController::class);
         Route::resource('/destination', App\Http\Controllers\Admin\DestinationController::class);
         Route::resource('/destination-image', App\Http\Controllers\Admin\DestinationImageController::class);

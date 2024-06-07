@@ -22,9 +22,9 @@ import {
     Thead,
     Tr,
 } from "@chakra-ui/react";
+import { CheckCircleIcon } from "@heroicons/react/16/solid";
 import AdminLayout from "../../Layouts/AdminLayout ";
 import Pagination from "../../Components/Pagination";
-import { CheckCircleIcon } from "@heroicons/react/16/solid";
 
 const CheckOut = ({ auth, sessions, transactions }) => {
     const perpage = useRef(transactions.per_page);
@@ -202,7 +202,7 @@ const CheckOut = ({ auth, sessions, transactions }) => {
                                             />
                                         </Td>
                                     </Tr>
-                                ) : transactions.length === 0 ? (
+                                ) : transactions.data.length === 0 ? (
                                     <Tr>
                                         <Td colSpan={8} textAlign="center">
                                             No data found

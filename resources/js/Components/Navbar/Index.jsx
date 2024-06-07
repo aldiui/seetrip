@@ -76,11 +76,7 @@ const Navbar = ({ auth, sessions }) => {
                             aria-label={"Toggle Navigation"}
                         />
                     </Flex>
-                    <Flex
-                        flex={{ base: 1 }}
-                        justify={{ base: "center", md: "start" }}
-                        w={"full"}
-                    >
+                    <Flex justify={{ base: "center", md: "start" }} w={"full"}>
                         <Text
                             textAlign={useBreakpointValue({
                                 base: "center",
@@ -89,7 +85,6 @@ const Navbar = ({ auth, sessions }) => {
                             fontWeight={"extrabold"}
                             fontSize={"xl"}
                             color="blue.500"
-                            mr={{ base: 20, md: 0 }}
                         >
                             SeeTrip.id
                         </Text>

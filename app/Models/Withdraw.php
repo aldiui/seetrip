@@ -36,6 +36,26 @@ class Withdraw extends Model
 
     protected $hidden = [
         "id",
+        "user_id",
+        "wallet_id",
     ];
 
+    public function toSearchableArray(): array
+    {
+        return [
+            'nomor_pembayaran' => $this->nomor_pembayaran,
+        ];
+    }
+
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        $destination = $this->destination;
+        $array['nominal_custom'] = formatRupiah($array['nominal']);
+        $array['admin_custom'] = formatRupiah($array['biaya_admin']);
+        $array['tanggal'] = formatTanggal($array['created_at'], 'j F Y');
+
+        return $array;
+    }
 }

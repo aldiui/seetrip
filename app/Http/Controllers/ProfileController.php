@@ -41,7 +41,7 @@ class ProfileController extends Controller
             return back()->with('success', 'Profile Berhasil diubah');
         }
 
-        $user = User::find(auth()->user()->id);
+        $user = User::with('wallets', 'destinations')->find(auth()->user()->id);
         return Inertia::render('User/Profile/Index', compact('user'));
 
     }

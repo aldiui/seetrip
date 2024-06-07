@@ -12,7 +12,7 @@ import { Link } from "@inertiajs/react";
 
 const CategorySection = ({ categories }) => {
     return (
-        <Container maxW={"container.xl"} px={6} py={10}>
+        <Container mt={"80px"} maxW={"container.xl"} px={6} py={10}>
             <Heading textAlign={"center"} fontSize={"3xl"}>
                 Kategori
             </Heading>
@@ -21,39 +21,37 @@ const CategorySection = ({ categories }) => {
                 Dari pantai yang menakjubkan hingga pegunungan yang menyejukkan,
                 temukan tempat liburan yang sempurna untuk Anda dan keluarga.
             </Text>
-            <SimpleGrid
-                columns={{ base: 1, md: 2, xl: 4 }}
-                spacing={10}
-                mt={10}
-            >
+            <SimpleGrid columns={{ base: 3, md: 3, xl: 4 }} spacing={8} mt={10}>
                 {categories.map((category, index) => (
-                    <Box
-                        key={index}
-                        textAlign="center"
-                        bg="blue.500"
-                        p={5}
-                        borderRadius="md"
-                        as={Link}
+                    <Link
                         href={`/wisata?category=${category.slug}`}
+                        key={index}
                     >
-                        <VStack>
-                            <Image
-                                src={category.avatar}
-                                alt={category.nama}
-                                borderRadius="full"
-                                boxSize="200px"
-                                objectFit="cover"
-                            />
-                            <Text
-                                mt={4}
-                                color="white"
-                                fontSize="xl"
-                                fontWeight="bold"
-                            >
-                                {category.nama}
-                            </Text>
-                        </VStack>
-                    </Box>
+                        <Box
+                            textAlign="center"
+                            bg="blue.500"
+                            p={5}
+                            borderRadius="md"
+                        >
+                            <VStack>
+                                <Image
+                                    src={category.avatar}
+                                    alt={category.nama}
+                                    borderRadius="full"
+                                    boxSize="full"
+                                    objectFit="cover"
+                                />
+                            </VStack>
+                        </Box>
+                        <Text
+                            mt={4}
+                            textAlign={"center"}
+                            fontSize={{ base: "xs", md: "lg" }}
+                            fontWeight="bold"
+                        >
+                            {category.nama}
+                        </Text>
+                    </Link>
                 ))}
             </SimpleGrid>
         </Container>

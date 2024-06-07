@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use Ramsey\Uuid\Uuid;
-use App\Models\Wallet;
-use App\Models\Voucher;
 use App\Models\Destination;
-use Laravel\Scout\Searchable;
 use App\Models\DestinationPrice;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Voucher;
+use App\Models\Wallet;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
+use Ramsey\Uuid\Uuid;
 
 class Transaction extends Model
 {

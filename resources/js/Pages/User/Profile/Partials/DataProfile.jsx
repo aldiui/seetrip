@@ -10,9 +10,10 @@ import {
     Text,
 } from "@chakra-ui/react";
 
-const DataProfile = ({ auth }) => {
+const DataProfile = ({ user }) => {
+    console.log(user)
     return (
-        <Card p={2} maxW={["full", "sm"]} w="full" h={["auto", "full"]}>
+        <Card p={2} maxW={"md"} w="full" h={["auto", "full"]}>
             <CardHeader>
                 <Heading size="md" fontWeight="bold" textAlign={"center"}>
                     Profile
@@ -21,8 +22,8 @@ const DataProfile = ({ auth }) => {
             <CardBody textAlign={"center"}>
                 <Avatar
                     flex={1}
-                    name={auth.user?.nama}
-                    src={auth.user.avatar ? `${auth.user.avatar}` : null}
+                    name={user?.nama}
+                    src={user.avatar ? `${user.avatar}` : null}
                     size="2xl"
                     alt="Avatar"
                     mb={4}
@@ -33,37 +34,37 @@ const DataProfile = ({ auth }) => {
                         <Text fontWeight="bold">Nama:</Text>
                     </GridItem>
                     <GridItem colSpan={1}>
-                        <Text>{auth.user.nama}</Text>
+                        <Text>{user.nama}</Text>
                     </GridItem>
                     <GridItem colSpan={1}>
                         <Text fontWeight="bold">Email:</Text>
                     </GridItem>
                     <GridItem colSpan={1}>
-                        <Text>{auth.user.email}</Text>
+                        <Text>{user.email}</Text>
                     </GridItem>
                     <GridItem colSpan={1}>
                         <Text fontWeight="bold">No HP:</Text>
                     </GridItem>
                     <GridItem colSpan={1}>
-                        <Text>{auth.user.phone ? auth.user.phone : "-"}</Text>
+                        <Text>{user.phone ? user.phone : "-"}</Text>
                     </GridItem>
                     <GridItem colSpan={1}>
                         <Text fontWeight="bold">Saldo:</Text>
                     </GridItem>
                     <GridItem colSpan={1}>
-                        <Text>{auth.user.saldo ?? 0}</Text>
+                        <Text>{user.saldo_custom ?? 0}</Text>
                     </GridItem>
                     <GridItem colSpan={1}>
                         <Text fontWeight="bold">Wallet:</Text>
                     </GridItem>
                     <GridItem colSpan={1}>
-                        <Text>{auth.user.wallet ?? 0}</Text>
+                        <Text>{user.wallets.length}</Text>
                     </GridItem>
                     <GridItem colSpan={1}>
                         <Text fontWeight="bold">Destinasi :</Text>
                     </GridItem>
                     <GridItem colSpan={1}>
-                        <Text>{auth.user.destinasi ?? 0}</Text>
+                        <Text>{user.destinations.length}</Text>
                     </GridItem>
                 </Grid>
             </CardBody>

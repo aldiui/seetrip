@@ -20,14 +20,6 @@ import {
 import { ArrowLeftIcon, BookmarkIcon } from "@heroicons/react/16/solid";
 
 const ShowDestination = ({ auth, sessions, transaction }) => {
-    const { data, setData, put, processing, errors } = useForm({
-        status: "",
-    });
-
-    const submit = (e) => {
-        e.preventDefault();
-        put(`/admin/transaction/${transaction.nomor_pemesanan}`);
-    };
     return (
         <AdminLayout auth={auth} sessions={sessions}>
             <Head title="Detail Transaksi" />
@@ -50,7 +42,12 @@ const ShowDestination = ({ auth, sessions, transaction }) => {
                         <Text>Paket Wisata</Text>
                         <Text>{transaction.destination_price.nama}</Text>
                         <Text>Pemilik Wisata</Text>
-                        <Text>{transaction.destination_price.destination.user.nama}</Text>
+                        <Text>
+                            {
+                                transaction.destination_price.destination.user
+                                    .nama
+                            }
+                        </Text>
 
                         <Text>Kuantitas</Text>
                         <Text>{transaction.quantitas} Orang</Text>
@@ -121,53 +118,6 @@ const ShowDestination = ({ auth, sessions, transaction }) => {
                             </div>
                         </Text>
                     </SimpleGrid>
-                    {transaction.wallet_id && transaction.status != 1 && (
-                        <form onSubmit={submit} my={4}>
-                            <FormControl mb={3} isInvalid={errors.status}>
-                                <FormLabel htmlFor="status" fontSize={"sm"}>
-                                    Status{" "}
-                                    <Text display={"inline"} color="red">
-                                        *
-                                    </Text>
-                                </FormLabel>
-                                <Select
-                                    type="text"
-                                    id="status"
-                                    value={data.status}
-                                    onChange={(e) =>
-                                        setData("status", e.target.value)
-                                    }
-                                >
-                                    <option value="">Pilih status</option>
-                                    <option value="1">Sukses</option>
-                                    <option value="2">Gagal</option>
-                                </Select>
-                                {errors.status && (
-                                    <FormErrorMessage fontSize={"xs"}>
-                                        {errors.status}
-                                    </FormErrorMessage>
-                                )}
-                            </FormControl>
-                            <Button
-                                type="submit"
-                                colorScheme="blue"
-                                isLoading={processing}
-                                loadingText="Simpan"
-                            >
-                                <Icon as={BookmarkIcon} mr={2} />
-                                Simpan
-                            </Button>
-                            <Button
-                                as={Link}
-                                href={"/admin/transaction"}
-                                colorScheme="gray"
-                                ml={3}
-                            >
-                                <Icon as={ArrowLeftIcon} mr={2} />
-                                Kembali
-                            </Button>
-                        </form>
-                    )}
                 </CardBody>
             </Card>
         </AdminLayout>

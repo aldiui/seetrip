@@ -15,11 +15,10 @@ const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
-    resolve: (name) =>
-        resolvePageComponent(
-            `./Pages/${name}.jsx`,
-            import.meta.glob("./Pages/**/*.jsx")
-        ),
+    resolve: (name) => {
+        const pages = import.meta.glob("./Pages/**/*.jsx", { eager: true });
+        return pages[`./Pages/${name}.jsx`];
+    },
     setup({ el, App, props }) {
         createRoot(el).render(
             <ChakraProvider theme={theme}>
