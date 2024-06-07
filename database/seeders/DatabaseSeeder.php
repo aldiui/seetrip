@@ -24,12 +24,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $dataKategori = [
-            ['nama' => 'Desa Wisata'],
-            ['nama' => 'Akomodasi'],
-            ['nama' => 'Trekking & Hiking'],
-            ['nama' => 'Bodyrafting'],
-            ['nama' => 'Camping Ground'],
-            ['nama' => 'Outbond'],
+            ['nama' => 'Desa Wisata', 'slug' => 'desa-wisata', 'avatar' => 'gambar1.png'],
+            ['nama' => 'Akomodasi', 'slug' => 'akomodasi', 'avatar' => 'gambar2.png'],
+            ['nama' => 'Trekking & Hiking', 'slug' => 'trekking-hiking', 'avatar' => 'gambar3.png'],
+            ['nama' => 'Bodyrafting', 'slug' => 'bodyrafting', 'avatar' => 'gambar4.png'],
+            ['nama' => 'Camping Ground', 'slug' => 'camping-ground', 'avatar' => 'gambar5.png'],
+            ['nama' => 'Outbond', 'slug' => 'outbond', 'avatar' => 'gambar6.png'],
         ];
 
         foreach ($dataKategori as $kategori) {

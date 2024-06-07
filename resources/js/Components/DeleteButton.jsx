@@ -47,7 +47,7 @@ const DeleteButton = ({ uri }) => {
 
             <Modal isOpen={isOpen} onClose={onClose} size="md">
                 <ModalOverlay />
-                <ModalContent>
+                <ModalContent m={6}>
                     <ModalHeader>Konfirmasi Penghapusan</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>

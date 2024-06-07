@@ -73,10 +73,34 @@ const DetailDestinationCard = ({ destination }) => {
                         <Text>{destination.lokasi}</Text>
                     </GridItem>
                     <GridItem colSpan={1}>
+                        <Text fontWeight="bold">Link Video Youtube :</Text>
+                    </GridItem>
+                    <GridItem colSpan={1}>
+                        <Text>{destination.link_video_youtube}</Text>
+                    </GridItem>
+                    <GridItem colSpan={1}>
                         <Text fontWeight="bold">Link Youtube :</Text>
                     </GridItem>
                     <GridItem colSpan={1}>
                         <Text>{destination.link_youtube}</Text>
+                    </GridItem>
+                    <GridItem colSpan={1}>
+                        <Text fontWeight="bold">Link Facebook :</Text>
+                    </GridItem>
+                    <GridItem colSpan={1}>
+                        <Text>{destination.link_facebook}</Text>
+                    </GridItem>
+                    <GridItem colSpan={1}>
+                        <Text fontWeight="bold">Link Instagram :</Text>
+                    </GridItem>
+                    <GridItem colSpan={1}>
+                        <Text>{destination.link_instagram}</Text>
+                    </GridItem>
+                    <GridItem colSpan={1}>
+                        <Text fontWeight="bold">Link Tiktok :</Text>
+                    </GridItem>
+                    <GridItem colSpan={1}>
+                        <Text>{destination.link_tiktok}</Text>
                     </GridItem>
                     <GridItem colSpan={1}>
                         <Text fontWeight="bold">Rating :</Text>

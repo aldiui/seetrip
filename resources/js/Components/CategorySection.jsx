@@ -34,7 +34,7 @@ const CategorySection = ({ categories }) => {
                         p={5}
                         borderRadius="md"
                         as={Link}
-                        href={`/wisata?category=${category.uuid}`}
+                        href={`/wisata?category=${category.slug}`}
                     >
                         <VStack>
                             <Image

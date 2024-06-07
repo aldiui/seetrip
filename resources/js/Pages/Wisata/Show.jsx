@@ -23,17 +23,28 @@ import {
     InputLeftElement,
     InputRightElement,
     useToast,
+    useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalHeader,
+    ModalCloseButton,
+    ModalBody,
+    ModalFooter,
+    ModalContent,
 } from "@chakra-ui/react";
 import {
+    CheckIcon,
     ChevronLeftIcon,
     ChevronRightIcon,
     MapPinIcon,
+    XMarkIcon,
 } from "@heroicons/react/16/solid";
 
 const ShowWisata = ({ auth, sessions, destination }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [selectedPackage, setSelectedPackage] = useState("");
     const [numberOfPeople, setNumberOfPeople] = useState(1);
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const toast = useToast();
 
     const nextImage = () => {
@@ -87,7 +98,19 @@ const ShowWisata = ({ auth, sessions, destination }) => {
                 variant: "left-accent",
             });
         } else {
-            console.log("Checkout process...");
+            if (!selectedPackage) {
+                toast({
+                    title: "Error",
+                    status: "error",
+                    description: "Anda harus memilih paket terlebih dahulu.",
+                    duration: 3000,
+                    isClosable: true,
+                    position: "top-right",
+                    variant: "left-accent",
+                });
+            } else {
+                onOpen();
+            }
         }
     };
 
@@ -114,7 +137,7 @@ const ShowWisata = ({ auth, sessions, destination }) => {
                             top="50%"
                             left="2%"
                             transform="translateY(-50%)"
-                            colorScheme="blue"
+                            colorScheme="grey"
                             zIndex="1"
                         >
                             <Icon as={ChevronLeftIcon} />
@@ -339,6 +362,37 @@ const ShowWisata = ({ auth, sessions, destination }) => {
                     </VStack>
                 </SimpleGrid>
             </Box>
+            <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent m={6}>
+                    <ModalHeader>Konfirmasi Checkout</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        Apakah Anda yakin ingin melanjutkan untuk checkout?
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button
+                            size={"sm"}
+                            colorScheme="gray"
+                            onClick={onClose}
+                        >
+                            <Icon as={XMarkIcon} mr={2} />
+                            Batal
+                        </Button>
+                        <Button
+                            size={"sm"}
+                            colorScheme="green"
+                            ml={3}
+                            onClick={() => {
+                                onClose();
+                            }}
+                        >
+                            <Icon as={CheckIcon} mr={2} />
+                            Checkout
+                        </Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
         </AppLayout>
     );
 };

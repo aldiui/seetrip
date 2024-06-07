@@ -33,60 +33,67 @@ const DestinationSection = ({ destinations }) => {
                 spacing={10}
                 mt={10}
             >
-                {destinations.map((destination) => {
-                    const fasilitasCount =
-                        destination.destination_facilities.filter(
-                            (facility) => facility.tipe === "Fasilitas"
-                        ).length;
-                    const akomodasiCount =
-                        destination.destination_facilities.filter(
-                            (facility) => facility.tipe === "Akomodasi"
-                        ).length;
+                {destinations.length === 0 ? (
+                    <></>
+                ) : (
+                    destinations.map((destination) => {
+                        const fasilitasCount =
+                            destination.destination_facilities.filter(
+                                (facility) => facility.tipe === "Fasilitas"
+                            ).length;
+                        const akomodasiCount =
+                            destination.destination_facilities.filter(
+                                (facility) => facility.tipe === "Akomodasi"
+                            ).length;
 
-                    return (
-                        <Card
-                            key={destination.uuid}
-                            as={Link}
-                            borderRadius="md"
-                            overflow="hidden"
-                            boxShadow="md"
-                            href={`/wisata/${destination.uuid}`}
-                        >
-                            <Image
-                                src={destination.destination_images[0]?.image}
-                                alt={destination.nama}
-                                objectFit="cover"
-                                w="100%"
-                                h="400px"
-                            />
-                            <CardBody>
-                                <VStack spacing={2} align={"start"}>
-                                    <Text fontSize="xl" fontWeight="bold">
-                                        {destination.nama}
-                                    </Text>
-                                    <Text fontSize="md">
-                                        {destination.category.nama}
-                                    </Text>
-                                    <Flex gap={2}>
-                                        <Icon
-                                            as={MapPinIcon}
-                                            color="blue.500"
-                                        />
-                                        <Text>{destination.lokasi}</Text>
-                                    </Flex>
-                                    <Box>
-                                        <Badge colorScheme="green" mr={2}>
-                                            Fasilitas: {fasilitasCount}
-                                        </Badge>
-                                        <Badge colorScheme="blue">
-                                            Akomodasi: {akomodasiCount}
-                                        </Badge>
-                                    </Box>
-                                </VStack>
-                            </CardBody>
-                        </Card>
-                    );
-                })}
+                        return (
+                            <Card
+                                key={destination.uuid}
+                                as={Link}
+                                borderRadius="md"
+                                overflow="hidden"
+                                boxShadow="md"
+                                href={`/wisata/${destination.slug}`}
+                                mb={4}
+                            >
+                                <Image
+                                    src={
+                                        destination.destination_images[0]?.image
+                                    }
+                                    alt={destination.nama}
+                                    objectFit="cover"
+                                    w="100%"
+                                    h="400px"
+                                />
+                                <CardBody>
+                                    <VStack spacing={2} align="start">
+                                        <Text fontSize="xl" fontWeight="bold">
+                                            {destination.nama}
+                                        </Text>
+                                        <Text fontSize="md">
+                                            {destination.category.nama}
+                                        </Text>
+                                        <Flex align="center" gap={2}>
+                                            <Icon
+                                                as={MapPinIcon}
+                                                color="blue.500"
+                                            />
+                                            <Text>{destination.lokasi}</Text>
+                                        </Flex>
+                                        <Box>
+                                            <Badge colorScheme="green" mr={2}>
+                                                Fasilitas: {fasilitasCount}
+                                            </Badge>
+                                            <Badge colorScheme="blue">
+                                                Akomodasi: {akomodasiCount}
+                                            </Badge>
+                                        </Box>
+                                    </VStack>
+                                </CardBody>
+                            </Card>
+                        );
+                    })
+                )}
             </SimpleGrid>
         </Container>
     );

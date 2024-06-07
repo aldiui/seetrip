@@ -15,11 +15,14 @@ import {
     Box,
     Image,
     Icon,
+    useToast,
 } from "@chakra-ui/react";
 import { useDropzone } from "react-dropzone";
 import { BookmarkIcon } from "@heroicons/react/16/solid";
 
 const UpdateProfile = ({ auth }) => {
+    const toast = useToast();
+
     const [preview, setPreview] = useState(null);
     const { data, setData, post, processing, errors, clearErrors } = useForm({
         avatar: "",
@@ -33,9 +36,23 @@ const UpdateProfile = ({ auth }) => {
             fileRejections.forEach((file) => {
                 file.errors.forEach((err) => {
                     if (err.code === "file-too-large") {
-                        console.error("File is too large");
+                        toast({
+                            title: "Error",
+                            status: "error",
+                            description: "File is too large",
+                            duration: 3000,
+                            isClosable: true,
+                            position: "top-right",
+                        });
                     } else if (err.code === "file-invalid-type") {
-                        console.error("Invalid file type");
+                        toast({
+                            title: "Error",
+                            status: "error",
+                            description: "File is invalid type",
+                            duration: 3000,
+                            isClosable: true,
+                            position: "top-right",
+                        });
                     }
                 });
             });
@@ -58,7 +75,7 @@ const UpdateProfile = ({ auth }) => {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
         accept: "image/jpg,image/jpeg,image/png",
-        maxSize: 2 * 1024 * 1024,
+        maxSize: 10 * 1024 * 1024,
         multiple: false,
     });
 

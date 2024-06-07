@@ -20,7 +20,7 @@ class DestinationImageController extends Controller
     {
         $request->validate([
             'destination_id' => 'required|exists:destinations,uuid',
-            'image' => 'required|image|max:2048|mimes:png,jpg,jpeg',
+            'image' => 'required|image|max:10240|mimes:png,jpg,jpeg',
         ]);
 
         if ($request->hasFile('image')) {
@@ -39,7 +39,7 @@ class DestinationImageController extends Controller
     public function edit($uuid)
     {
         $destinationImage = DestinationImage::whereUuid($uuid)->firstOrFail();
-        return Inertia::render('Admin/Destination/Image/Edit', compact('destination'));
+        return Inertia::render('Admin/Destination/Image/Edit', compact('destinationImage'));
     }
 
     public function update(Request $request, $uuid)
@@ -47,7 +47,7 @@ class DestinationImageController extends Controller
         $destinationImage = DestinationImage::with('destination')->whereUuid($uuid)->firstOrFail();
 
         $request->validate([
-            'image' => 'required|image|max:2048|mimes:png,jpg,jpeg',
+            'image' => 'required|image|max:10240|mimes:png,jpg,jpeg',
         ]);
 
         if ($request->hasFile('image')) {

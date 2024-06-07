@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->string('avatar')->nullable();
+            $table->string('slug');
             $table->string('nama');
             $table->timestamps();
         });

@@ -16,11 +16,11 @@ class ProfileController extends Controller
             $request->validate([
                 'nama' => 'required',
                 'email' => 'required|unique:users,email,' . auth()->user()->id,
-                'avatar' => 'nullable|image|max:2048|mimes:png,jpg,jpeg',
+                'avatar' => 'nullable|image|max:10240|mimes:png,jpg,jpeg',
                 'phone' => 'required|numeric|digits_between:10,13',
             ], [
                 'avatar.image' => 'File harus berupa gambar',
-                'avatar.max' => 'File maksimal 2 MB',
+                'avatar.max' => 'File maksimal 10 MB',
                 'avatar.mimes' => 'File harus berupa PNG, JPG, JPEG',
                 'phone.digits_between' => 'Nomor HP harus 10-13 digit',
                 'phone.numeric' => 'Nomor HP harus berupa angka',

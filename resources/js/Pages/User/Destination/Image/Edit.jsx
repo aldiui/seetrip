@@ -18,7 +18,7 @@ import {
 import { ArrowLeftIcon, BookmarkIcon } from "@heroicons/react/16/solid";
 import AdminLayout from "../../../../Layouts/AdminLayout ";
 
-const EditDestinationFacility = ({ auth, sessions, destinationFacility }) => {
+const EditDestinationImage = ({ auth, sessions, destinationFacility }) => {
     const { data, setData, put, processing, errors } = useForm({
         tipe: destinationFacility.tipe,
         nama: destinationFacility.nama,
@@ -117,4 +117,4 @@ const EditDestinationFacility = ({ auth, sessions, destinationFacility }) => {
     );
 };
 
-export default EditDestinationFacility;
+export default EditDestinationImage;

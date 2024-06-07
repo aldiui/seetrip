@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class CategoryController extends Controller
@@ -28,16 +29,27 @@ class CategoryController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'avatar' => 'required|image|max:2048|mimes:png,jpg,jpeg',
+            'avatar' => 'required|image|max:10240|mimes:png,jpg,jpeg',
         ]);
 
         if ($request->hasFile('avatar')) {
-            $request->file('avatar')->store('images/categories', 'public');
+            $avatarName = $request->file('avatar')->hashName();
+            $request->file('avatar')->storeAs('public/images/categories', $avatarName);
+        }
+
+        $slug = Str::slug($request->input('nama'), '-');
+
+        $originalSlug = $slug;
+        $counter = 1;
+        while (Category::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $counter;
+            $counter++;
         }
 
         Category::create([
             'nama' => $request->input('nama'),
-            'avatar' => $request->file('avatar')->hashName(),
+            'slug' => $slug,
+            'avatar' => $avatarName,
         ]);
 
         return redirect('/admin/category')->with('success', 'Kategori Berhasil ditambahkan');
@@ -55,7 +67,7 @@ class CategoryController extends Controller
 
         $request->validate([
             'nama' => 'required',
-            'avatar' => 'nullable|image|max:2048|mimes:png,jpg,jpeg',
+            'avatar' => 'nullable|image|max:10240|mimes:png,jpg,jpeg',
         ]);
 
         if ($request->hasFile('avatar')) {
@@ -64,7 +76,21 @@ class CategoryController extends Controller
             $category->update(['avatar' => $request->file('avatar')->hashName()]);
         }
 
-        $category->update($request->only('nama'));
+        $slug = Str::slug($request->input('nama'), '-');
+
+        if ($slug !== $category->slug) {
+            $originalSlug = $slug;
+            $counter = 1;
+            while (Category::where('slug', $slug)->exists()) {
+                $slug = $originalSlug . '-' . $counter;
+                $counter++;
+            }
+        }
+
+        $category->update([
+            'nama' => $request->input('nama'),
+            'slug' => $slug,
+        ]);
         return redirect('/admin/category')->with('success', 'Kategori Berhasil diubah');
     }
 

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Destination;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class DestinationController extends Controller
@@ -37,20 +38,38 @@ class DestinationController extends Controller
             'category_id' => 'required|exists:categories,uuid',
             'nama' => 'required',
             'deskripsi' => 'required',
-            'link_youtube' => 'required',
+            'link_video_youtube' => 'nullable',
+            'link_youtube' => 'nullable',
+            'link_facebook' => 'nullable',
+            'link_instagram' => 'nullable',
+            'link_tiktok' => 'nullable',
             'lokasi' => 'required',
             'rating' => 'required|numeric',
         ]);
 
         $user = User::whereUuid($request->input('user_id'))->firstOrFail();
         $category = Category::whereUuid($request->input('category_id'))->firstOrFail();
+        $slug = Str::slug($request->input('nama'), '-');
+
+        $originalSlug = $slug;
+        $counter = 1;
+
+        while (Destination::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $counter;
+            $counter++;
+        }
 
         Destination::create([
             'user_id' => $user->id,
             'category_id' => $category->id,
             'nama' => $request->input('nama'),
+            'slug' => $slug,
             'deskripsi' => $request->input('deskripsi'),
+            'link_video_youtube' => $request->input('link_video_youtube'),
             'link_youtube' => $request->input('link_youtube'),
+            'link_facebook' => $request->input('link_facebook'),
+            'link_instagram' => $request->input('link_instagram'),
+            'link_tiktok' => $request->input('link_tiktok'),
             'lokasi' => $request->input('lokasi'),
             'rating' => $request->input('rating'),
         ]);
@@ -81,20 +100,39 @@ class DestinationController extends Controller
             'category_id' => 'required|exists:categories,uuid',
             'nama' => 'required',
             'deskripsi' => 'required',
-            'link_youtube' => 'required',
+            'link_video_youtube' => 'nullable',
+            'link_youtube' => 'nullable',
+            'link_facebook' => 'nullable',
+            'link_instagram' => 'nullable',
+            'link_tiktok' => 'nullable',
             'lokasi' => 'required',
             'rating' => 'required|numeric',
         ]);
 
         $user = User::whereUuid($request->input('user_id'))->firstOrFail();
         $category = Category::whereUuid($request->input('category_id'))->firstOrFail();
+        $slug = slug($request->input('nama'), '-');
+
+        if ($slug !== $destination->slug) {
+            $originalSlug = $slug;
+            $counter = 1;
+            while (Destination::where('slug', $slug)->exists()) {
+                $slug = $originalSlug . '-' . $counter;
+                $counter++;
+            }
+        }
 
         $destination->update([
             'user_id' => $user->id,
             'category_id' => $category->id,
             'nama' => $request->input('nama'),
+            'slug' => $slug,
             'deskripsi' => $request->input('deskripsi'),
+            'link_video_youtube' => $request->input('link_video_youtube'),
             'link_youtube' => $request->input('link_youtube'),
+            'link_facebook' => $request->input('link_facebook'),
+            'link_instagram' => $request->input('link_instagram'),
+            'link_tiktok' => $request->input('link_tiktok'),
             'lokasi' => $request->input('lokasi'),
             'rating' => $request->input('rating'),
         ]);

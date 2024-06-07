@@ -16,7 +16,7 @@ class WisataController extends Controller
         $cekCategory = null;
 
         if ($categoryUUID) {
-            $cekCategory = Category::where('uuid', $categoryUUID)->first();
+            $cekCategory = Category::where('slug', $categoryUUID)->first();
         }
 
         $destinationsQuery = Destination::search($request->search)
@@ -36,9 +36,9 @@ class WisataController extends Controller
         return Inertia::render('Wisata/Index', compact('destinations', 'categories'));
     }
 
-    public function show($uuid)
+    public function show($slug)
     {
-        $destination = Destination::with(['user', 'category', 'destinationImages', 'destinationPrices', 'destinationVouchers', 'destinationFacilities'])->whereUuid($uuid)->firstOrFail();
+        $destination = Destination::with(['user', 'category', 'destinationImages', 'destinationPrices', 'destinationVouchers', 'destinationFacilities'])->whereSlug($slug)->firstOrFail();
         return Inertia::render('Wisata/Show', compact('destination'));
     }
 }

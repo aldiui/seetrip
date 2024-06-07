@@ -14,29 +14,31 @@ import {
     Icon,
     Image,
     Input,
+    Select,
     Text,
+    useToast,
 } from "@chakra-ui/react";
 import { ArrowLeftIcon, BookmarkIcon } from "@heroicons/react/16/solid";
-import AdminLayout from "../../../Layouts/AdminLayout ";
+import AdminLayout from "../../../../Layouts/AdminLayout ";
 import { useDropzone } from "react-dropzone";
 
-const EditCategory = ({ auth, sessions, category }) => {
+const EditDestinationImage = ({ auth, sessions, destinationImage }) => {
+    const toast = useToast();
     const [preview, setPreview] = useState(null);
     const { data, setData, post, processing, errors } = useForm({
         _method: "put",
-        nama: category.nama,
-        avatar: "",
+        image: "",
     });
 
     useEffect(() => {
-        if (category.avatar) {
-            setPreview(category.avatar);
+        if (destinationImage.image) {
+            setPreview(destinationImage.image);
         }
-    }, [category.avatar]);
+    }, [destinationImage.image]);
 
     const submit = (e) => {
         e.preventDefault();
-        post(`/admin/category/${category.uuid}`);
+        post(`/destination-image/${destinationImage.uuid}`);
     };
 
     const onDrop = (acceptedFiles, fileRejections) => {
@@ -44,9 +46,23 @@ const EditCategory = ({ auth, sessions, category }) => {
             fileRejections.forEach((file) => {
                 file.errors.forEach((err) => {
                     if (err.code === "file-too-large") {
-                        console.error("File is too large");
+                        toast({
+                            title: "Error",
+                            status: "error",
+                            description: "File is too large",
+                            duration: 3000,
+                            isClosable: true,
+                            position: "top-right",
+                        });
                     } else if (err.code === "file-invalid-type") {
-                        console.error("Invalid file type");
+                        toast({
+                            title: "Error",
+                            status: "error",
+                            description: "File is invalid type",
+                            duration: 3000,
+                            isClosable: true,
+                            position: "top-right",
+                        });
                     }
                 });
             });
@@ -56,7 +72,7 @@ const EditCategory = ({ auth, sessions, category }) => {
 
         const file = acceptedFiles[0];
         if (file) {
-            setData("avatar", file);
+            setData("image", file);
 
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -75,18 +91,21 @@ const EditCategory = ({ auth, sessions, category }) => {
 
     return (
         <AdminLayout auth={auth} sessions={sessions}>
-            <Head title="Edit Kategori" />
+            <Head title="Edit Gambar Destinasi" />
             <Card maxW={"xl"} w="full" p={2} h={"auto"}>
                 <CardHeader pb={0}>
                     <Heading size="md" fontWeight="bold">
-                        Edit Kategori
+                        Edit Gambar Destinasi
                     </Heading>
                 </CardHeader>
                 <form onSubmit={submit}>
                     <CardBody pb={0}>
-                        <FormControl mb={3} isInvalid={errors.avatar}>
-                            <FormLabel htmlFor="avatar" fontSize={"sm"}>
-                                Avatar
+                        <FormControl mb={3} isInvalid={errors.image}>
+                            <FormLabel htmlFor="image" fontSize={"sm"}>
+                                Gambar{" "}
+                                <Text display={"inline"} color="red">
+                                    *
+                                </Text>
                             </FormLabel>
                             <Box
                                 {...getRootProps()}
@@ -118,30 +137,9 @@ const EditCategory = ({ auth, sessions, category }) => {
                                     />
                                 )}
                             </Box>
-                            {errors.avatar && (
+                            {errors.image && (
                                 <FormErrorMessage fontSize={"xs"}>
-                                    {errors.avatar}
-                                </FormErrorMessage>
-                            )}
-                        </FormControl>
-                        <FormControl mb={3} isInvalid={errors.nama}>
-                            <FormLabel htmlFor="nama" fontSize={"sm"}>
-                                Nama
-                                <Text display={"inline"} color="red">
-                                    *
-                                </Text>
-                            </FormLabel>
-                            <Input
-                                type="text"
-                                id="nama"
-                                value={data.nama}
-                                onChange={(e) =>
-                                    setData("nama", e.target.value)
-                                }
-                            />
-                            {errors.nama && (
-                                <FormErrorMessage fontSize={"xs"}>
-                                    {errors.nama}
+                                    {errors.image}
                                 </FormErrorMessage>
                             )}
                         </FormControl>
@@ -158,7 +156,10 @@ const EditCategory = ({ auth, sessions, category }) => {
                         </Button>
                         <Button
                             as={Link}
-                            href={"/admin/category"}
+                            href={
+                                "/destination/" +
+                                destinationImage.destination_uuid
+                            }
                             colorScheme="gray"
                             ml={3}
                         >
@@ -172,4 +173,4 @@ const EditCategory = ({ auth, sessions, category }) => {
     );
 };
 
-export default EditCategory;
+export default EditDestinationImage;

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('destination_price_id')->references('id')->on('destination_prices')->onDelete('cascade');
             $table->foreignId('voucher_id')->nullable()->references('id')->on('vouchers')->onDelete('set null');
-            $table->foreignId('wallet_id')->references('id')->on('wallets')->onDelete('cascade');
+            $table->foreignId('wallet_id')->nullable()->references('id')->on('wallets')->onDelete('set null');
             $table->string('nomor_pemesanan');
             $table->unsignedBigInteger('quantitas');
             $table->unsignedBigInteger('diskon');

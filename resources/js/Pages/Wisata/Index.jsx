@@ -36,9 +36,10 @@ const Wisata = ({ auth, sessions, categories, destinations }) => {
         }
     }, []);
 
-    useEffect(() => {
+    const handleChangeCategory = (e) => {
+        setCategory(e.target.value);
         getData();
-    }, [search, category]);
+    };
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -84,12 +85,12 @@ const Wisata = ({ auth, sessions, categories, destinations }) => {
                     <Select
                         width={{ base: "100%", md: "auto" }}
                         mb={{ base: 2, md: 0 }}
-                        onChange={(e) => setCategory(e.target.value)}
+                        onChange={(e) => handleChangeCategory}
                         value={category}
                     >
                         <option value="">Semua Kategori</option>
                         {categories.map((option) => (
-                            <option key={option.uuid} value={option.uuid}>
+                            <option key={option.slug} value={option.slug}>
                                 {option.nama}
                             </option>
                         ))}
@@ -190,7 +191,7 @@ const Wisata = ({ auth, sessions, categories, destinations }) => {
                                     borderRadius="md"
                                     overflow="hidden"
                                     boxShadow="md"
-                                    href={`/wisata/${destination.uuid}`}
+                                    href={`/wisata/${destination.slug}`}
                                 >
                                     <Image
                                         src={
