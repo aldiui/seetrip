@@ -54,6 +54,7 @@ class Withdraw extends Model
         $destination = $this->destination;
         $array['nominal_custom'] = formatRupiah($array['nominal']);
         $array['admin_custom'] = formatRupiah($array['biaya_admin']);
+        $array['total'] = formatRupiah($array['nominal'] - $array['biaya_admin']);
         $array['tanggal'] = formatTanggal($array['created_at'], 'j F Y');
 
         return $array;

@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->alias([
             'checkRole' => CheckRole::class,
+            'PDF' => Barryvdh\DomPDF\Facade::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

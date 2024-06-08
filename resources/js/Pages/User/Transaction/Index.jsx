@@ -171,7 +171,7 @@ const Transaction = ({ auth, sessions, transactions }) => {
                                         color="white"
                                         w="5"
                                     >
-                                        Kuantitas
+                                        Pembayaran
                                     </Th>
                                     <Th
                                         fontWeight="extrabold"
@@ -179,7 +179,7 @@ const Transaction = ({ auth, sessions, transactions }) => {
                                         color="white"
                                         w="5"
                                     >
-                                        Pembayaran
+                                        Kuantitas
                                     </Th>
                                     <Th
                                         fontWeight="extrabold"
@@ -245,14 +245,14 @@ const Transaction = ({ auth, sessions, transactions }) => {
                                                     }
                                                 </Td>
                                                 <Td>
-                                                    {transaction.quantitas}{" "}
-                                                    Orang
-                                                </Td>
-                                                <Td>
                                                     {transaction.wallet_id
                                                         ? transaction.wallet
                                                               .nama_bank
                                                         : "-"}
+                                                </Td>
+                                                <Td>
+                                                    {transaction.quantitas}{" "}
+                                                    Orang
                                                 </Td>
                                                 <Td>
                                                     {transaction.total_custom}

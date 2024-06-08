@@ -109,7 +109,14 @@ const ShowOrder = ({ auth, sessions, order, pembayaran }) => {
     return (
         <AppLayout auth={auth} sessions={sessions}>
             <Head title="Detail Order" />
-            <VStack mt={"80px"} maxW={"container.xl"} w="full">
+            <VStack
+                maxW={"container.xl"}
+                mt={"80px"}
+                px={6}
+                py={10}
+                w="full"
+                h={["auto", "full"]}
+            >
                 <Card p={2} maxW={"xl"} w="full" shadow={"md"}>
                     <CardHeader>
                         <Heading

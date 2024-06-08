@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use PDF;
 
 class TransactionController extends Controller
 {
@@ -59,5 +60,24 @@ class TransactionController extends Controller
         Storage::disk('public')->delete('images/bukti-bayar/' . basename($transaction->bukti_bayar));
         $transaction->delete();
         return back()->with('success', 'Transaksi Berhasil dihapus');
+    }
+
+    public function exportPdf()
+    {
+        $transactions = Transaction::with('destinationPrice', 'destinationPrice.destination', 'user', 'wallet')->where('status', '1')->latest()->get();
+
+        $pdf = PDF::loadView('pages.admin.transaction', compact('transactions'));
+
+        $options = [
+            'margin_top' => 20,
+            'margin_right' => 20,
+            'margin_bottom' => 20,
+            'margin_left' => 20,
+        ];
+
+        $pdf->setOptions($options);
+        $pdf->setPaper('a4');
+        return $pdf->stream("Laporan-Transaksi.pdf");
+
     }
 }

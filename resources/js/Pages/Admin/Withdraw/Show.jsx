@@ -32,11 +32,11 @@ const ShowWithdraw = ({ auth, sessions, withdraw }) => {
     };
     return (
         <AdminLayout auth={auth} sessions={sessions}>
-            <Head title="Detail Transaksi" />
+            <Head title="Detail Penarikan" />
             <Card maxW={"xl"} w="full" p={2} h={"auto"}>
                 <CardHeader pb={0}>
                     <Heading size="md" fontWeight="bold">
-                        Detail Transaki
+                        Detail Penarikan
                     </Heading>
                 </CardHeader>
                 <CardBody>

@@ -58,7 +58,7 @@ const Withdraw = ({ auth, sessions, withdraws }) => {
 
     return (
         <AdminLayout auth={auth} sessions={sessions}>
-            <Head title="Withdraw" />
+            <Head title="Penarikan" />
             <Card p={2} w="full" h={["auto", "full"]}>
                 <CardHeader
                     display={"flex"}
@@ -66,7 +66,7 @@ const Withdraw = ({ auth, sessions, withdraws }) => {
                     alignItems={"center"}
                 >
                     <Heading size="md" fontWeight="bold">
-                        Data Withdraw
+                        Data Penarikan
                     </Heading>
                     <Button
                         as={Link}
@@ -163,6 +163,14 @@ const Withdraw = ({ auth, sessions, withdraws }) => {
                                         color="white"
                                         w="5"
                                     >
+                                        Pembayaran
+                                    </Th>
+                                    <Th
+                                        fontWeight="extrabold"
+                                        fontSize="md"
+                                        color="white"
+                                        w="5"
+                                    >
                                         Nominal
                                     </Th>
                                     <Th
@@ -179,7 +187,7 @@ const Withdraw = ({ auth, sessions, withdraws }) => {
                                         color="white"
                                         w="5"
                                     >
-                                        Pembayaran
+                                        Total
                                     </Th>
                                     <Th
                                         fontWeight="extrabold"
@@ -217,9 +225,10 @@ const Withdraw = ({ auth, sessions, withdraws }) => {
                                             <Td>{calculateIndex(index)}</Td>
                                             <Td>{withdraw.nomor_pembayaran}</Td>
                                             <Td>{withdraw.tanggal}</Td>
+                                            <Td>{withdraw.wallet.nama_bank}</Td>
                                             <Td>{withdraw.nominal_custom}</Td>
                                             <Td>{withdraw.admin_custom}</Td>
-                                            <Td>{withdraw.wallet.nama_bank}</Td>
+                                            <Td>{withdraw.total}</Td>
                                             <Td
                                                 display={"flex"}
                                                 flexDirection={"column"}

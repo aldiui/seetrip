@@ -31,11 +31,11 @@ const CreateWithdraw = ({ auth, sessions, wallets }) => {
 
     return (
         <AdminLayout auth={auth} sessions={sessions}>
-            <Head title="Tambah Withdraw" />
+            <Head title="Tambah Penarikan" />
             <Card maxW={"xl"} w="full" p={2} h={"auto"}>
                 <CardHeader pb={0}>
                     <Heading size="md" fontWeight="bold">
-                        Tambah Withdraw
+                        Tambah Penarikan
                     </Heading>
                 </CardHeader>
                 <form onSubmit={submit}>

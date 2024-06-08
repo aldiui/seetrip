@@ -293,6 +293,7 @@ const CreateUser = ({ auth, sessions }) => {
                                 <option value="">Pilih Role</option>
                                 <option value="user">user</option>
                                 <option value="admin">admin</option>
+                                <option value="customer">customer</option>
                             </Select>
                             {errors.role && (
                                 <FormErrorMessage fontSize={"xs"}>

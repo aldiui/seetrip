@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use PDF;
 
 class WithdrawController extends Controller
 {
@@ -50,5 +51,23 @@ class WithdrawController extends Controller
         }
 
         return redirect('/admin/withdraw')->with('success', 'Withdraw berhasil di ubah');
+    }
+
+    public function exportPdf()
+    {
+        $withdraws = Withdraw::with('user', 'wallet')->where('status', '1')->latest()->get();
+
+        $pdf = PDF::loadView('pages.admin.withdraw', compact('withdraws'));
+
+        $options = [
+            'margin_top' => 20,
+            'margin_right' => 20,
+            'margin_bottom' => 20,
+            'margin_left' => 20,
+        ];
+
+        $pdf->setOptions($options);
+        $pdf->setPaper('a4');
+        return $pdf->stream("Laporan-Withdraw.pdf");
     }
 }

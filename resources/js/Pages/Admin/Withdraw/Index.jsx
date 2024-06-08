@@ -24,7 +24,11 @@ import {
 } from "@chakra-ui/react";
 import AdminLayout from "../../../Layouts/AdminLayout ";
 import Pagination from "../../../Components/Pagination";
-import { CheckCircleIcon, PlusIcon } from "@heroicons/react/16/solid";
+import {
+    CheckCircleIcon,
+    DocumentIcon,
+    PlusIcon,
+} from "@heroicons/react/16/solid";
 
 const Withdraw = ({ auth, sessions, withdraws }) => {
     const perpage = useRef(withdraws.per_page);
@@ -58,7 +62,7 @@ const Withdraw = ({ auth, sessions, withdraws }) => {
 
     return (
         <AdminLayout auth={auth} sessions={sessions}>
-            <Head title="Withdraw" />
+            <Head title="Penarikan" />
             <Card p={2} w="full" h={["auto", "full"]}>
                 <CardHeader
                     display={"flex"}
@@ -66,15 +70,15 @@ const Withdraw = ({ auth, sessions, withdraws }) => {
                     alignItems={"center"}
                 >
                     <Heading size="md" fontWeight="bold">
-                        Data Withdraw
+                        Data Penarikan
                     </Heading>
                     <Button
-                        as={Link}
-                        href="/withdraw/create"
-                        colorScheme="green"
+                        as="a"
+                        href="/admin/withdraw/export-pdf"
+                        colorScheme="red"
                         size={"sm"}
                     >
-                        <Icon as={PlusIcon} name="plus" mr={2} /> Tambah
+                        <Icon as={DocumentIcon} name="plus" mr={2} /> Cetak
                     </Button>
                 </CardHeader>
                 <CardBody>
@@ -163,6 +167,22 @@ const Withdraw = ({ auth, sessions, withdraws }) => {
                                         color="white"
                                         w="5"
                                     >
+                                        User
+                                    </Th>
+                                    <Th
+                                        fontWeight="extrabold"
+                                        fontSize="md"
+                                        color="white"
+                                        w="5"
+                                    >
+                                        Pembayaran
+                                    </Th>
+                                    <Th
+                                        fontWeight="extrabold"
+                                        fontSize="md"
+                                        color="white"
+                                        w="5"
+                                    >
                                         Nominal
                                     </Th>
                                     <Th
@@ -179,7 +199,7 @@ const Withdraw = ({ auth, sessions, withdraws }) => {
                                         color="white"
                                         w="5"
                                     >
-                                        Pembayaran
+                                        Total
                                     </Th>
                                     <Th
                                         fontWeight="extrabold"
@@ -217,9 +237,11 @@ const Withdraw = ({ auth, sessions, withdraws }) => {
                                             <Td>{calculateIndex(index)}</Td>
                                             <Td>{withdraw.nomor_pembayaran}</Td>
                                             <Td>{withdraw.tanggal}</Td>
+                                            <Td>{withdraw.user.nama}</Td>
+                                            <Td>{withdraw.wallet.nama_bank}</Td>
                                             <Td>{withdraw.nominal_custom}</Td>
                                             <Td>{withdraw.admin_custom}</Td>
-                                            <Td>{withdraw.wallet.nama_bank}</Td>
+                                            <Td>{withdraw.total}</Td>
                                             <Td
                                                 display={"flex"}
                                                 flexDirection={"column"}

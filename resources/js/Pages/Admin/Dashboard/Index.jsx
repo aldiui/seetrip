@@ -8,8 +8,22 @@ import {
     UserGroupIcon,
     WalletIcon,
 } from "@heroicons/react/16/solid";
+import MonthlyRevenueChart from "./Partials/MonthlyRevenueChart";
+import TopOwnersChart from "./Partials/TopOwnersChart";
+import TopOwnersTable from "./Partials/TopOwnersTable";
+import TransactionsTable from "./Partials/TransactionsTable";
+import TopDataTable from "./Partials/TopDataTable";
 
-const Dashboard = ({ auth, sessions, count }) => {
+const Dashboard = ({
+    auth,
+    sessions,
+    count,
+    monthlyRevenue,
+    topOwners,
+    tanggalToday,
+    transactions,
+    topData,
+}) => {
     return (
         <AdminLayout auth={auth} sessions={sessions}>
             <Head title="Dashboard" />
@@ -99,6 +113,76 @@ const Dashboard = ({ auth, sessions, count }) => {
                     </Flex>
                 </Box>
             </SimpleGrid>
+            <Box
+                bg="white"
+                p={8}
+                borderRadius="md"
+                shadow={"md"}
+                w={"full"}
+                mt={8}
+                mb={8}
+            >
+                <Text size="md" fontWeight="bold" mb={5}>
+                    Grafik Revenue
+                </Text>
+                <MonthlyRevenueChart data={monthlyRevenue} />
+            </Box>
+            <Box
+                bg="white"
+                p={8}
+                borderRadius="md"
+                shadow={"md"}
+                w={"full"}
+                mt={8}
+                mb={8}
+            >
+                <Text size="md" fontWeight="bold" mb={5}>
+                    Grafik Pemilik Wisata Dengan Pembelian Tiket Terbanyak
+                </Text>
+                <TopOwnersChart data={topOwners} />
+            </Box>
+            <Box
+                bg="white"
+                p={8}
+                borderRadius="md"
+                shadow={"md"}
+                w={"full"}
+                mt={8}
+                mb={8}
+            >
+                <Text size="md" fontWeight="bold" mb={5}>
+                    Tabel Pemilik Pembelian Tiket Terbanyak
+                </Text>
+                <TopOwnersTable data={topOwners} />
+            </Box>
+            <Box
+                bg="white"
+                p={8}
+                borderRadius="md"
+                shadow={"md"}
+                w={"full"}
+                mt={8}
+                mb={8}
+            >
+                <Text size="md" fontWeight="bold" mb={5}>
+                    Tabel Penjualan {tanggalToday}
+                </Text>
+                <TransactionsTable data={transactions} />
+            </Box>
+            <Box
+                bg="white"
+                p={8}
+                borderRadius="md"
+                shadow={"md"}
+                w={"full"}
+                mt={8}
+                mb={8}
+            >
+                <Text size="md" fontWeight="bold" mb={5}>
+                    Tabel Wisata Terbanyak Pembelian
+                </Text>
+                <TopDataTable data={topData} />
+            </Box>
         </AdminLayout>
     );
 };

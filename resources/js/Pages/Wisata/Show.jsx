@@ -38,6 +38,7 @@ import {
     ChevronLeftIcon,
     ChevronRightIcon,
     MapPinIcon,
+    UserCircleIcon,
     XMarkIcon,
 } from "@heroicons/react/16/solid";
 import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa";
@@ -180,6 +181,10 @@ const ShowWisata = ({ auth, sessions, destination }) => {
                             {destination.nama}
                         </Text>
                         <Text fontSize="md">{destination.category.nama}</Text>
+                        <Flex gap={2}>
+                            <Icon as={UserCircleIcon} color="blue.500" />
+                            <Text>{destination.user.nama}</Text>
+                        </Flex>
                         <Flex gap={2}>
                             <Icon as={MapPinIcon} color="blue.500" />
                             <Text>{destination.lokasi}</Text>

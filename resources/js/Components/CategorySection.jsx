@@ -23,7 +23,7 @@ const CategorySection = ({ categories }) => {
                 mx={"auto"}
                 alt="Seetrip Logo"
             ></Img>
-            <Flex as="form" gap={2} align="center" w={"full"}>
+            <Flex gap={2} align="center" w={"full"}>
                 <Input
                     id="search"
                     name="search"

@@ -34,7 +34,7 @@ const ShowDestination = ({ auth, sessions, transaction }) => {
             <Card maxW={"xl"} w="full" p={2} h={"auto"}>
                 <CardHeader pb={0}>
                     <Heading size="md" fontWeight="bold">
-                        Detail Transaki
+                        Detail Transaksi
                     </Heading>
                 </CardHeader>
                 <CardBody>
