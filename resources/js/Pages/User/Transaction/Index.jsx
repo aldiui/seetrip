@@ -24,7 +24,7 @@ import {
 } from "@chakra-ui/react";
 import Pagination from "../../../Components/Pagination";
 import AdminLayout from "../../../Layouts/AdminLayout ";
-import { CheckCircleIcon } from "@heroicons/react/16/solid";
+import { CheckCircleIcon, DocumentIcon } from "@heroicons/react/16/solid";
 
 const Transaction = ({ auth, sessions, transactions }) => {
     const perpage = useRef(transactions.per_page);
@@ -68,6 +68,14 @@ const Transaction = ({ auth, sessions, transactions }) => {
                     <Heading size="md" fontWeight="bold">
                         Data Transaksi
                     </Heading>
+                    <Button
+                        as="a"
+                        href="/user/transaction/export-pdf"
+                        colorScheme="red"
+                        size={"sm"}
+                    >
+                        <Icon as={DocumentIcon} name="plus" mr={2} /> Cetak
+                    </Button>
                 </CardHeader>
                 <CardBody>
                     <Flex

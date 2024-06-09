@@ -1,0 +1,1 @@
+import{f as s,j as h}from"./app-3Odire-T.js";var o=s(function(t,a){const{htmlWidth:e,htmlHeight:i,alt:m,...r}=t;return h.jsx("img",{width:e,height:i,ref:a,alt:m,...r})});o.displayName="NativeImage";export{o as N};

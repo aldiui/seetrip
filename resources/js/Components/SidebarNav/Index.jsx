@@ -31,11 +31,7 @@ const SidebarNav = ({ children, auth }) => {
             icon: CurrencyDollarIcon,
             href: "/user/transaction",
         },
-        {
-            name: "Penarikan",
-            icon: ArrowDownCircleIcon,
-            href: "/user/withdraw",
-        },
+
         { name: "Profile", icon: UserCircleIcon, href: "/user/profile" },
     ];
 
@@ -49,11 +45,7 @@ const SidebarNav = ({ children, auth }) => {
             icon: CurrencyDollarIcon,
             href: "/admin/transaction",
         },
-        {
-            name: "Penarikan",
-            icon: ArrowDownCircleIcon,
-            href: "/admin/withdraw",
-        },
+
         { name: "Destinasi", icon: MapPinIcon, href: "/admin/destination" },
         { name: "Profile", icon: UserCircleIcon, href: "/admin/profile" },
     ];

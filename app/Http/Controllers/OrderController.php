@@ -51,8 +51,8 @@ class orderController extends Controller
 
     public function show($nomorPemesanan)
     {
-        $order = Transaction::with('destinationPrice', 'destinationPrice.destination', 'user', 'wallet')->where('nomor_pemesanan', $nomorPemesanan)->where('user_id', auth()->user()->id)->firstOrFail();
-        $pembayaran = Wallet::whereTipe('admin')->get();
+        $order = Transaction::with('destinationPrice', 'destinationPrice.destination', 'destinationPrice.destination.user', 'user', 'wallet')->where('nomor_pemesanan', $nomorPemesanan)->where('user_id', auth()->user()->id)->firstOrFail();
+        $pembayaran = Wallet::whereUserId($order->destinationPrice->destination->user->id)->get();
         return Inertia::render('Customer/Order/Show', compact('order', 'pembayaran'));
     }
 

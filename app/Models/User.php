@@ -6,7 +6,6 @@ namespace App\Models;
 use App\Models\Destination;
 use App\Models\Transaction;
 use App\Models\Wallet;
-use App\Models\Withdraw;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -46,11 +45,6 @@ class User extends Authenticatable
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
-    }
-
-    public function withdraws()
-    {
-        return $this->hasMany(Withdraw::class);
     }
 
     protected function avatar(): Attribute

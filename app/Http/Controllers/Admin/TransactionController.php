@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use PDF;
 
@@ -52,14 +51,6 @@ class TransactionController extends Controller
         }
 
         return redirect('/admin/transaction')->with('success', 'Transaksi Berhasil diubah');
-    }
-
-    public function destroy($nomorPemesanan)
-    {
-        $transaction = Transaction::where('nomor_pemesanan', $nomorPemesanan)->firstOrFail();
-        Storage::disk('public')->delete('images/bukti-bayar/' . basename($transaction->bukti_bayar));
-        $transaction->delete();
-        return back()->with('success', 'Transaksi Berhasil dihapus');
     }
 
     public function exportPdf()
